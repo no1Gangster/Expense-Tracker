@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const moment = require("moment-timezone")
 
 const expenseSchema = new mongoose.Schema({
     userId:{
@@ -19,9 +20,16 @@ const expenseSchema = new mongoose.Schema({
         enum:['debit','credit','pending'],
         required:true
     },
-    note:String
-},{
-    timestamps:true //adds createdAt and updatedAt val
+    note:String,
+    createdAt: Date
+})
+
+//middleware --> set timestamp to ist
+expenseSchema.pre("save",function(next){
+    const nowUTC = moment.utc()
+    const nowIST = nowUTC.add(5,"hours").add(30,"minutes").tz("Asia/Kolkata")
+    this.createdAt = nowIST
+    next()
 })
 
 const Expense = mongoose.model("Expense",expenseSchema)
