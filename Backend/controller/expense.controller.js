@@ -13,8 +13,25 @@ async function addExpense(req,res){
     }
 }
 
-//get an expense record
+//get all expenses of a user
+async function getExpenseByUserId(req,res){
+    try{
+        let {userId} = req.params
+        let expense = await Expense.find({userId})
+        if(expense){
+            res.status(200).json(expense)
+        }
+        else{
+            res.status(404).json({"message":"Data not found"})
+        }
+    }
+    catch(error){
+        console.error(error);
+        res.status(500).json({"message":error.message})
+    }
+}
 
 module.exports={
-    addExpense
+    addExpense,
+    getExpenseByUserId
 }

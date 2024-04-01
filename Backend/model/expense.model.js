@@ -11,6 +11,11 @@ const expenseSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
+    //to be changed to date type from calender input
+    exp_date:{
+        type:String,
+        required:true
+    },
     exp_category:{
         type:String,
         required:true
