@@ -1,0 +1,18 @@
+.nav-link {
+    color: rgb(45, 248, 187) !important;
+}
+.navbar-items :hover {
+	border-bottom: 1px solid red;
+	padding-bottom: 2px;
+	color: red !important;
+}
+
+.btn-neon {
+	background-color: rgb(36, 58, 90) !important;
+	color: rgb(45, 248, 187) !important;
+}
+
+.btn-neon:hover {
+	background-color: black !important;
+	color: red !important;
+}
