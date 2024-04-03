@@ -52,9 +52,9 @@ async function filterExpenseByDate(req,res){
             }
         });
         if (expenses.length > 0) {
-            return res.status(200).json(expenses);
+            res.status(200).json(expenses);
         } else {
-            return res.status(404).json({ "message": "No transactions found within the specified date range" });
+            res.status(404).json({ "message": "No transactions found within the specified date range" });
         }
 
     } catch (error) {
@@ -84,9 +84,9 @@ async function filterExpenseByMonth(req,res){
         });
     
         if (expenses.length > 0) {
-            return res.status(200).json(expenses);
+            res.status(200).json(expenses);
         } else {
-            return res.status(404).json({ "message": "No transactions found for the specified month and year" });
+            res.status(404).json({ "message": "No transactions found for the specified month and year" });
         }
 
     } catch (error) {
@@ -115,9 +115,9 @@ async function filterExpenseByYear(req,res){
         });
     
         if (expenses.length > 0) {
-            return res.status(200).json(expenses);
+            res.status(200).json(expenses);
         } else {
-            return res.status(404).json({ "message": "No transactions found for the specified year" });
+            res.status(404).json({ "message": "No transactions found for the specified year" });
         }
 
     } catch (error) {
