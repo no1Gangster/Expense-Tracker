@@ -125,6 +125,22 @@ async function filterExpenseByYear(req,res){
         res.status(400).json({"message":error.message})
     }
 }
+async function filterExpenseByType(req,res){
+    try {
+        let userId=req.params.userId
+        let type=req.query.type
+        let expense=await Expense.find({userId,exp_type:type})
+        if(expense.length>0){
+            res.status(200).json(expense)
+        }
+        else{
+            res.status(404).json({"message":`No transactions found for ${type}`})
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({"message":error.message})
+    }
+}
 
 async function updateExpense(req,res){
     try{
@@ -178,6 +194,7 @@ module.exports={
     filterExpenseByDate,
     filterExpenseByMonth,
     filterExpenseByYear,
+    filterExpenseByType,
     updateExpense,
     deleteExpense,
     getExpenseSortedByAmount
