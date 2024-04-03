@@ -142,6 +142,24 @@ async function filterExpenseByType(req,res){
     }
 }
 
+async function filterExpenseByCategory(req,res){
+    try {
+        let userId=req.params.userId
+        let category=req.query.category
+        let categoryRegex=new RegExp(category,'i')
+        let expense=await Expense.find({userId,exp_category:{$regex:categoryRegex}})
+        if(expense.length>0){
+            res.status(200).json(expense)
+        }
+        else{
+            res.status(404).json({"message":`No transactions found for ${category}`})
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(400).json({"message":error.message})
+    }
+}
+
 async function updateExpense(req,res){
     try{
         let {userId,expenseId} = req.params
@@ -195,6 +213,7 @@ module.exports={
     filterExpenseByMonth,
     filterExpenseByYear,
     filterExpenseByType,
+    filterExpenseByCategory,
     updateExpense,
     deleteExpense,
     getExpenseSortedByAmount
