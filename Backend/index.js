@@ -3,6 +3,9 @@ const dbConnect = require("./db/db")
 const userRouter = require("./route/user.route")
 const expenseRouter = require("./route/expense.route")
 
+require('dotenv').config()
+
+const PORT = process.env.PORT || 3000
 const app = express()
 
 //middlewares
@@ -18,4 +21,4 @@ app.get("/",(req,res)=>{
 })
 
 dbConnect()
-app.listen(3000,()=>console.log("http://localhost:3000"))
+app.listen(PORT,()=>console.log("http://localhost:3000"))

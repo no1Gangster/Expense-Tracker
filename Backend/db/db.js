@@ -1,9 +1,9 @@
 const mongoose = require("mongoose")
 async function dbConnect(){
-    DBURL = "mongodb+srv://adyasha:12345@cluster0.ewxrfas.mongodb.net"
-    DBNAME = "expense_tracker"
+    const DB_URL = process.env.DBURL
+    const DB = process.env.DBNAME
     try{
-        await mongoose.connect(DBURL + "/" + DBNAME)
+        await mongoose.connect(DB_URL + "/" + DB)
         console.log("Database Connected");
     }
     catch(error){
