@@ -1,14 +1,14 @@
 :root {
-	--base-blue:rgb(89, 108, 255);
-	--base-green:rgb(0, 243, 189);
-	--base-red:rgb(242, 139, 130);
-	--neon-red:#FF004D;
-	--neon-green:rgb(63, 255, 46);
-	--none-blue:#04D9FF;
-	--dark-blue:rgb(28, 36, 95);
+	--base-blue: rgb(89, 108, 255);
+	--base-green: rgb(0, 243, 189);
+	--base-red: rgb(242, 139, 130);
+	--neon-red: #ff004d;
+	--neon-green: rgb(63, 255, 46);
+	--none-blue: #04d9ff;
+	--dark-blue: rgb(28, 36, 95);
 }
 .nav-link {
-    color: var(--neon-green) !important;
+	color: var(--neon-green) !important;
 }
 .navbar-items :hover {
 	border-bottom: 1px solid var(--neon-red);
@@ -30,8 +30,8 @@
 	grid-row: span 2;
 }
 
-.expense-list::-webkit-scrollbar{
-	background: grey;
+.expense-list::-webkit-scrollbar {
+	background: transparent;
 	width: 0.5rem;
 	border-radius: 100vw;
 }
@@ -40,14 +40,29 @@
 	background: grey;
 	width: 0.5rem;
 	border-radius: 100vw;
+	margin-block: 0.2svh;
 }
 
 .expense-list::-webkit-scrollbar-thumb {
+	margin-block: 20px;
 	background: rgba(245, 245, 245, 0.74);
 	width: 0.5rem;
 	border-radius: 100vw;
 }
 
-.expense-list::-webkit-scrollbar:hover {
+.expense-list::-webkit-scrollbar-thumb:hover {
 	cursor: pointer;
+}
+
+.form-dock {
+	width: 95svw;
+	border: 1px solid grey;
+	margin: auto;
+	box-shadow: 0 0 100px black;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import ExpenseCard from "../components/ExpenseCard";
 import HomePieChart from "../components/HomePieChart";
 import Overview from "../components/Overview";
+import ExpenseForm from "../components/ExpenseForm";
 
 function Home() {
 	const data = [
@@ -192,8 +193,8 @@ function Home() {
 							))}
 					</div>
 				</div>
-				<div className="col-md-4">Summary</div>
 			</div>
+			<div className="sticky-bottom bg-dark"><ExpenseForm /></div>
 		</div>
 	);
 }

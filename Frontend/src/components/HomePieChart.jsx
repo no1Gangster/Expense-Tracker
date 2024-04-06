@@ -82,7 +82,7 @@ const renderActiveShape = (props) => {
 				textAnchor={textAnchor}
 				fill="#999"
 			>
-				{`(Rate ${(percent * 100).toFixed(2)}%)`}
+				{`${(percent * 100).toFixed(2)}%`}
 			</text>
 		</g>
 	);
@@ -107,7 +107,7 @@ export default class HomePieChart extends PureComponent {
 			{ name: "Pending", value: pending },
 		];
 		return (
-			<div style={{ outline: "none", width: "50svw", height: "30svh" }}>
+			<div style={{ outline: "none", width: "100svw", height: "30svh" }}>
 				<ResponsiveContainer
 					width="100%"
 					height="100%"

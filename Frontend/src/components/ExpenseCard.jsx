@@ -12,7 +12,7 @@ function ExpenseCard({ note, date, expense, type }) {
 		sign = "+";
 	} else style = { color: "rgb(89, 108, 255)" };
 	return (
-		<div className="container mb-3">
+		<div className="container mb-3 px-2">
 			<div className="card px-md-5">
 				<div className="card-body">
 					<div className="row">
