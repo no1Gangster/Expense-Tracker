@@ -1,7 +1,5 @@
 const mongoose = require("mongoose")
 const Expense = require("../model/expense.model")
-const moment = require('moment');
-
 
 //post an expense 
 async function addExpense(req,res){
@@ -82,6 +80,24 @@ async function getExpenseSortedByAmount(req,res){
     }
 }
 
+//Sort expenses by expense date - recent one first
+async function getExpenseSortedByExpenseDate(req,res){
+    try{
+        const {userId} = req.params
+        const expenses = await Expense.find({userId}).sort({exp_date:-1})
+        if(expenses){
+            res.status(200).json(expenses)
+        }
+        else{
+            res.status(404).json({"message":"Expense not found"})
+        }
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json({"message":error.message})
+    }
+}
+
 //Recent week expense summary of a given user 
 async function getExpenseSummaryLastSevenDays(req,res){
     try{
@@ -134,5 +150,6 @@ module.exports={
     updateExpense,
     deleteExpense,
     getExpenseSortedByAmount,
-    getExpenseSummaryLastSevenDays
+    getExpenseSummaryLastSevenDays,
+    getExpenseSortedByExpenseDate
 }
