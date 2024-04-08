@@ -4,7 +4,7 @@
 	--base-red: rgb(242, 139, 130);
 	--neon-red: #ff004d;
 	--neon-green: rgb(63, 255, 46);
-	--none-blue: #04d9ff;
+	--neon-blue: #04d9ff;
 	--dark-blue: rgb(28, 36, 95);
 }
 .nav-link {
@@ -61,8 +61,41 @@
 	box-shadow: 0 0 100px black;
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+.amount-enter::-webkit-inner-spin-button,
+.amount-enter::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.amount-enter {
+	background-color: black !important;
+}
+
+.dark-input {
+	caret-color: white;
+}
+.dark-input::-webkit-input-placeholder {
+	color: grey !important;
+}
+.card-element {
+	background-color: #363d44 !important;
+	box-shadow: 0 0 3px black;
+}
+
+.date-inp {
+	color: grey !important;
+}
+
+.date-inp::-webkit-input-placeholder {
+	color: white;
+}
+select {
+	color: grey !important;
+}
+option {
+	color: white;
+}
+
+.overview-div {
+	background-color: #363d44 !important;
 }

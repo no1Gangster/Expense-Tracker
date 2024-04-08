@@ -153,21 +153,23 @@ function Home() {
 	const pending = 4000;
 
 	return (
-		<div className="container-flex bg-dark" style={{height:"92.1svh"}}>
-			<h1>Welcome User</h1>
+		<div
+			className="container-flex bg-dark main"
+			style={{ height: "92.1svh" }}
+		>
 			<div
 				className="row"
 				style={{ width: "99%" }}
 			>
 				<div className="col-md-4 text-light">
-					<div className="d-flex justify-content-center ms-3 mb-md-5">
+					<div className="d-flex justify-content-center ms-3 mb-md-5 z-3 position-relative">
 						<HomePieChart
 							credit={credit}
 							debit={debit}
 							pending={pending}
 						/>
 					</div>
-					<div className="container mx-auto w-75 mb-3 pt-md-5">
+					<div className="container mx-auto w-75 mb-3 pt-md-5 z-3 position-relative overview-div p-3 rounded-3">
 						<Overview
 							credit={credit}
 							debit={debit}
@@ -176,7 +178,9 @@ function Home() {
 					</div>
 				</div>
 				<div className="col-md-8">
-					<h1 className="text-light px-5 mb-3">Expense History</h1>
+					<h1 className="text-light px-5 mb-3 z-3 position-relative">
+						Expense History
+					</h1>
 					<div
 						className="expense-list ms-4 me-1"
 						style={{ height: "68svh", overflowY: "scroll" }}
@@ -194,7 +198,9 @@ function Home() {
 					</div>
 				</div>
 			</div>
-			<div className="sticky-bottom bg-dark"><ExpenseForm /></div>
+			<div className="sticky-bottom bg-transparent mt-5 mb-4 pt-4">
+				<ExpenseForm />
+			</div>
 		</div>
 	);
 }

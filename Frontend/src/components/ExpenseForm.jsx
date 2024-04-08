@@ -28,7 +28,7 @@ function ExpenseForm() {
 						<div>
 							<input
 								type="text"
-								className="form-control"
+								className="form-control bg-dark dark-input"
 								placeholder="Description"
 								ref={noteRef}
 							/>
@@ -36,10 +36,10 @@ function ExpenseForm() {
 					</div>
 					<div className="col">
 						<div className="input-group">
-							<span className="input-group-text">₹</span>
+							<span className="input-group-text bg-dark text-light">₹</span>
 							<input
 								type="number"
-								className="form-control"
+								className="form-control bg-dark amount-enter dark-input text-light"
 								placeholder="Amount"
 								ref={amtRef}
 							/>
@@ -49,7 +49,7 @@ function ExpenseForm() {
 						<div>
 							<input
 								type="date"
-								className="form-control"
+								className="form-control bg-dark dark-input date-inp"
 								ref={dateRef}
 							/>
 						</div>
@@ -57,7 +57,7 @@ function ExpenseForm() {
 					<div className="col-lg-2">
 						<div>
 							<select
-								className="form-select"
+								className="form-select bg-dark dark-input"
 								ref={typeRef}
 							>
 								<option value="debit">Debit</option>
