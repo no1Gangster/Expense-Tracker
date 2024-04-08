@@ -3,7 +3,11 @@ const{
     addExpense,
     getExpenseByUserId,
     updateExpense,
-    deleteExpense,getExpenseSortedByAmount, filterExpenseByDate, filterExpenseByMonth,filterExpenseByYear, filterExpenseByType, filterExpenseByCategory
+    deleteExpense,getExpenseSortedByAmount, 
+    filterExpenseByDate, filterExpenseByMonth,filterExpenseByYear, filterExpenseByType, 
+    filterExpenseByCategory,
+    getExpenseSummaryLastSevenDays,
+    getOverview
 }=require("../controller/expense.controller")
 
 const expenseRouter = express.Router()
@@ -18,5 +22,7 @@ expenseRouter.get("/filterByCategory/:userId",filterExpenseByCategory)
 expenseRouter.put("/:userId/:expenseId",updateExpense)
 expenseRouter.delete("/:userId/:expenseId",deleteExpense)
 expenseRouter.get("/:userId/sorted",getExpenseSortedByAmount)
+expenseRouter.get("/:userId/weekSummary",getExpenseSummaryLastSevenDays)
+expenseRouter.get("/getOverview/:userId",getOverview)
 
 module.exports = expenseRouter

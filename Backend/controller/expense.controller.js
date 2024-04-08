@@ -205,6 +205,80 @@ async function getExpenseSortedByAmount(req,res){
         res.status(500).json({"message":error.message})
     }
 }
+async function getExpenseSummaryLastSevenDays(req,res){
+    try{
+        const endDate = new Date();
+        const startDate = new Date(endDate)
+        startDate.setDate(startDate.getDate()-7)
+
+        const start_date = startDate.toISOString().split('T')[0]
+        const end_date = endDate.toISOString().split('T')[0]
+
+        const {userId} = req.params
+        const expenses = await Expense.find({userId,exp_date:{$gte:start_date,$lte:end_date}})
+
+        let totalDebit=0
+        let totalCredit=0
+        let totalPending=0
+
+        expenses.forEach((expense)=>{
+            switch(expense.exp_type){
+                case 'debit':
+                    totalDebit += expense.amount;
+                    break
+                case 'credit':
+                    totalCredit += expense.amount;
+                    break
+                case 'pending':
+                    totalPending += expense.amount;
+                    break
+                default:
+                    break
+            }
+        })
+
+        const totalExpenses = totalCredit + totalDebit + totalPending
+        const creditPercentage = ((totalCredit/totalExpenses)*100).toFixed(4)
+        const debitPercentage = ((totalDebit/totalExpenses)*100).toFixed(4)
+        const pendingPercentage = ((totalPending/totalExpenses)*100).toFixed(4)
+
+        res.status(200).json({totalCredit,totalDebit,totalPending,creditPercentage,debitPercentage,pendingPercentage})
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json({"message":error.message})
+    }
+}
+
+async function getOverview(req,res){
+    try {
+        const {userId}=req.params
+        const expenses=await Expense.find({userId})
+        if(expenses){
+            let balance=0,totalDebit=0,totalCredit=0,totalPending=0;
+            expenses.forEach(expense=>{
+                if(expense.exp_type.toLowerCase()=="credit"){
+                    totalCredit+=expense.amount
+                }
+                else if(expense.exp_type.toLowerCase()=='debit'){
+                    totalDebit+=expense.amount
+                }
+                else if(expense.exp_type.toLowerCase()=='pending'){
+                    totalPending+=expense.amount
+                }
+            })
+            balance=totalCredit+totalPending-totalDebit;
+            res.status(200).json({totalCredit,totalDebit,totalPending,balance})
+        }
+        else{
+            res.status(404).json({"message":"No transactions found."})
+        }
+    } 
+    catch (error) {
+        console.log(error)
+        res.status(500).json({"message":error.message})
+    }
+}
 
 module.exports={
     addExpense,
@@ -216,5 +290,7 @@ module.exports={
     filterExpenseByCategory,
     updateExpense,
     deleteExpense,
-    getExpenseSortedByAmount
+    getExpenseSortedByAmount,
+    getExpenseSummaryLastSevenDays,
+    getOverview
 }
