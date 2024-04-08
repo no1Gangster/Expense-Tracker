@@ -18,7 +18,7 @@ function ExpenseForm() {
         dateRef.current.value = null
 	}
 	return (
-		<div className="form-dock rounded-2 mt-2 p-2 text-white">
+		<div className="form-dock rounded-2 mt-2 p-2 text-white bg-dark">
 			<form
 				method="post"
 				onSubmit={handleSubmit}

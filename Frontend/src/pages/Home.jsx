@@ -3,6 +3,7 @@ import ExpenseCard from "../components/ExpenseCard";
 import HomePieChart from "../components/HomePieChart";
 import Overview from "../components/Overview";
 import ExpenseForm from "../components/ExpenseForm";
+import MouseFollower from "../components/MouseFollower";
 
 function Home() {
 	const data = [
@@ -157,49 +158,53 @@ function Home() {
 			className="container-flex bg-dark main"
 			style={{ height: "92.1svh" }}
 		>
-			<div
-				className="row"
-				style={{ width: "99%" }}
-			>
-				<div className="col-md-4 text-light">
-					<div className="d-flex justify-content-center ms-3 mb-md-5 z-3 position-relative">
-						<HomePieChart
-							credit={credit}
-							debit={debit}
-							pending={pending}
-						/>
+			<div className="blob-container">
+				<MouseFollower />
+
+				<div
+					className="row"
+					style={{ width: "99%" }}
+				>
+					<div className="col-md-4 text-light">
+						<div className="d-flex justify-content-center ms-3 mb-md-5 z-3 position-relative">
+							<HomePieChart
+								credit={credit}
+								debit={debit}
+								pending={pending}
+							/>
+						</div>
+						<div className="container mx-auto w-75 mb-3 pt-md-5 z-3 position-relative overview-div p-3 rounded-3">
+							<Overview
+								credit={credit}
+								debit={debit}
+								pending={pending}
+							/>
+						</div>
 					</div>
-					<div className="container mx-auto w-75 mb-3 pt-md-5 z-3 position-relative overview-div p-3 rounded-3">
-						<Overview
-							credit={credit}
-							debit={debit}
-							pending={pending}
-						/>
+					<div className="col-md-8 mt-5">
+						<h1 className="text-light px-5 mb-3 z-3 position-relative">
+							Expense History
+						</h1>
+						<div
+							className="expense-list ms-4 me-1"
+							style={{ height: "72.7svh", overflowY: "scroll" }}
+						>
+							{data &&
+								data.map((item) => (
+									<ExpenseCard
+										note={item.description}
+										date={item.date}
+										expense={item.amount}
+										type={item.type}
+										key={item.id}
+									/>
+								))}
+						</div>
 					</div>
 				</div>
-				<div className="col-md-8">
-					<h1 className="text-light px-5 mb-3 z-3 position-relative">
-						Expense History
-					</h1>
-					<div
-						className="expense-list ms-4 me-1"
-						style={{ height: "68svh", overflowY: "scroll" }}
-					>
-						{data &&
-							data.map((item) => (
-								<ExpenseCard
-									note={item.description}
-									date={item.date}
-									expense={item.amount}
-									type={item.type}
-									key={item.id}
-								/>
-							))}
-					</div>
+				<div className="sticky-bottom bg-transparent mt-5 mb-4 pt-4">
+					<ExpenseForm />
 				</div>
-			</div>
-			<div className="sticky-bottom bg-transparent mt-5 mb-4 pt-4">
-				<ExpenseForm />
 			</div>
 		</div>
 	);
