@@ -18,7 +18,7 @@ function ExpenseForm() {
         dateRef.current.value = null
 	}
 	return (
-		<div className="form-dock rounded-2 mt-2 p-2 text-white bg-dark">
+		<div className="form-dock rounded-2 mt-md-2 p-2 text-white bg-vary">
 			<form
 				method="post"
 				onSubmit={handleSubmit}
@@ -32,6 +32,20 @@ function ExpenseForm() {
 								placeholder="Description"
 								ref={noteRef}
 							/>
+						</div>
+					</div>
+					<div className="col-lg-2">
+						<div>
+							<select
+								className="form-select bg-dark dark-input"
+								ref={typeRef}
+							>
+								<option value="personal">Personal</option>
+								<option value="food">Food</option>
+								<option value="utility">Utility</option>
+								<option value="medical">Medical</option>
+								<option value="medical">Other...</option>
+							</select>
 						</div>
 					</div>
 					<div className="col">

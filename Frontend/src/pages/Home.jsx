@@ -9,143 +9,163 @@ function Home() {
 	const data = [
 		{
 			id: 1,
-			description: "Grocery shopping",
-			amount: 50.25,
-			date: "2024-03-01",
-			type: "debit",
+			description: "Groceries",
+			amount: 50.0,
+			date: "2024-04-01",
+			type: "credit",
+			category: "food",
 		},
 		{
 			id: 2,
-			description: "Salary payment",
-			amount: 2500.0,
-			date: "2024-03-02",
-			type: "credit",
+			description: "Dinner with friends",
+			amount: 30.0,
+			date: "2024-04-02",
+			type: "debit",
+			category: "other",
 		},
 		{
 			id: 3,
-			description: "Electricity bill",
-			amount: 80.5,
-			date: "2024-03-03",
-			type: "debit",
+			description: "Gas refill",
+			amount: 40.0,
+			date: "2024-04-03",
+			type: "credit",
+			category: "other",
 		},
 		{
 			id: 4,
-			description: "Dinner at a restaurant",
-			amount: 75.0,
-			date: "2024-03-04",
-			type: "debit",
+			description: "Salary",
+			amount: 2000.0,
+			date: "2024-04-05",
+			type: "pending",
+			category: "other",
 		},
 		{
 			id: 5,
-			description: "Gasoline",
-			amount: 40.0,
-			date: "2024-03-05",
+			description: "Movie tickets",
+			amount: 25.0,
+			date: "2024-04-06",
 			type: "debit",
+			category: "other",
 		},
 		{
 			id: 6,
-			description: "Online purchase",
-			amount: 120.75,
-			date: "2024-03-06",
-			type: "debit",
+			description: "Electricity bill",
+			amount: 60.0,
+			date: "2024-04-07",
+			type: "credit",
+			category: "utility",
 		},
 		{
 			id: 7,
-			description: "Freelance income",
-			amount: 800.0,
-			date: "2024-03-07",
-			type: "credit",
+			description: "Phone bill",
+			amount: 35.0,
+			date: "2024-04-10",
+			type: "debit",
+			category: "utility",
 		},
 		{
 			id: 8,
-			description: "Phone bill",
-			amount: 45.5,
-			date: "2024-03-08",
-			type: "debit",
+			description: "Freelance project payment",
+			amount: 300.0,
+			date: "2024-04-11",
+			type: "pending",
+			category: "other",
 		},
 		{
 			id: 9,
-			description: "Movie tickets",
-			amount: 25.0,
-			date: "2024-03-09",
+			description: "New headphones",
+			amount: 70.0,
+			date: "2024-04-13",
 			type: "debit",
+			category: "other",
 		},
 		{
 			id: 10,
-			description: "Deposit",
-			amount: 1000.0,
-			date: "2024-03-10",
+			description: "Gift for friend's birthday",
+			amount: 20.0,
+			date: "2024-04-15",
 			type: "credit",
+			category: "other",
 		},
 		{
 			id: 11,
-			description: "Internet subscription",
-			amount: 60.0,
-			date: "2024-03-11",
-			type: "debit",
+			description: "Pending payment from client",
+			amount: 500.0,
+			date: "2024-04-16",
+			type: "pending",
+			category: "other",
 		},
 		{
 			id: 12,
-			description: "Lunch",
-			amount: 15.5,
-			date: "2024-03-12",
-			type: "debit",
+			description: "Lunch at work",
+			amount: 15.0,
+			date: "2024-04-17",
+			type: "credit",
+			category: "food",
 		},
 		{
 			id: 13,
-			description: "Taxi fare",
-			amount: 30.0,
-			date: "2024-03-13",
+			description: "Monthly subscription",
+			amount: 10.0,
+			date: "2024-04-18",
 			type: "debit",
+			category: "utility",
 		},
 		{
 			id: 14,
-			description: "Gift purchase",
-			amount: 50.0,
-			date: "2024-03-14",
-			type: "debit",
+			description: "Repair car",
+			amount: 200.0,
+			date: "2024-04-19",
+			type: "pending",
+			category: "other",
 		},
 		{
 			id: 15,
-			description: "Rent payment",
-			amount: 1200.0,
-			date: "2024-03-15",
-			type: "pending",
+			description: "Salary",
+			amount: 2000.0,
+			date: "2024-04-21",
+			type: "debit",
+			category: "other",
 		},
 		{
 			id: 16,
-			description: "Cashback",
-			amount: 20.0,
-			date: "2024-03-16",
-			type: "credit",
+			description: "Groceries",
+			amount: 60.0,
+			date: "2024-04-23",
+			type: "pending",
+			category: "food",
 		},
 		{
 			id: 17,
-			description: "Medical expenses",
-			amount: 90.0,
-			date: "2024-03-17",
+			description: "Gift for sister's birthday",
+			amount: 30.0,
+			date: "2024-04-24",
 			type: "debit",
+			category: "personal",
 		},
 		{
 			id: 18,
-			description: "Utility bill",
-			amount: 100.0,
-			date: "2024-03-18",
+			description: "Dinner at restaurant",
+			amount: 40.0,
+			date: "2024-04-25",
 			type: "debit",
+			category: "utility",
 		},
 		{
 			id: 19,
-			description: "Refund",
-			amount: 35.75,
-			date: "2024-03-19",
-			type: "credit",
+			description: "Online course",
+			amount: 50.0,
+			date: "2024-04-27",
+			type: "pending",
+			category: "medical",
 		},
 		{
 			id: 20,
-			description: "Grocery shopping",
-			amount: 55.5,
-			date: "2024-03-20",
+			description: "Coffee with friends",
+			amount: 10.0,
+			date: "2024-04-28",
 			type: "debit",
+			category: "other",
 		},
 	];
 
@@ -155,7 +175,7 @@ function Home() {
 
 	return (
 		<div
-			className="container-flex bg-dark main"
+			className="container-fluid bg-dark main"
 			style={{ height: "92.1svh" }}
 		>
 			<div className="blob-container">
@@ -165,8 +185,8 @@ function Home() {
 					className="row"
 					style={{ width: "99%" }}
 				>
-					<div className="col-md-4 text-light">
-						<div className="d-flex justify-content-center ms-3 mb-md-5 z-3 position-relative">
+					<div className="col-md-4 mt-md-5 text-light">
+						<div className="d-flex justify-content-center ms-3 my-md-5 z-3 position-relative">
 							<HomePieChart
 								credit={credit}
 								debit={debit}
@@ -185,13 +205,11 @@ function Home() {
 						<h1 className="text-light px-5 mb-3 z-3 position-relative">
 							Expense History
 						</h1>
-						<div
-							className="expense-list ms-4 me-1"
-							style={{ height: "72.7svh", overflowY: "scroll" }}
-						>
+						<div className="container-fluid expense-list ms-4 me-1">
 							{data &&
 								data.map((item) => (
 									<ExpenseCard
+										category={item.category}
 										note={item.description}
 										date={item.date}
 										expense={item.amount}
@@ -202,7 +220,7 @@ function Home() {
 						</div>
 					</div>
 				</div>
-				<div className="sticky-bottom bg-transparent mt-5 mb-4 pt-4">
+				<div className="sticky-bottom bg-transparent mt-md-5 mb-4 pt-4 pb-md-3">
 					<ExpenseForm />
 				</div>
 			</div>
