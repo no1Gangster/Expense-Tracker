@@ -62,7 +62,6 @@ async function checkBudgetStatus(req,res){
         if(!user){
             return res.status(404).json({"message":"User not found"})
         }
-
         const userBudget = user.budget
         const startDate = user.startDate
         const endDate = user.endDate
@@ -70,7 +69,6 @@ async function checkBudgetStatus(req,res){
         const expenses = await Expense.find({
             userId:userId,exp_date:{$gte:startDate,$lte:endDate}
         })
-
         //can be changed to reuse getOverview() if date range is added
         let totalCredit=0,totalDebit=0,totalPending=0
         expenses.forEach(expense =>{
@@ -82,16 +80,14 @@ async function checkBudgetStatus(req,res){
                 totalPending+=expense.amount
             }
         })
-        const balance = totalCredit - totalDebit + totalPending
-        const budgetStatus = balance >= userBudget? 'Within budget limit':'Exceeded budget limit'
-
-        res.status(200).json({userBudget:userBudget,balance:balance,budgetStatus:budgetStatus})
+        const balance = Math.abs(totalCredit - totalDebit + totalPending)
+        const budgetStatus = userBudget >= totalDebit? `Within budget limit set between ${startDate} and ${endDate}`:`Exceeded budget limit set between ${startDate} and ${endDate}. Over budget by Rs.${totalDebit-userBudget}`
+        res.status(200).json({userBudget:userBudget,totalDebit:totalDebit,balance:balance,budgetStatus:budgetStatus})
     }catch(error){
         console.log(error);
         res.status(500).json({"message":error.message})
     }
 }
-
 
 module.exports={
     addUser,
