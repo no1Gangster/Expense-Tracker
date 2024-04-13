@@ -144,6 +144,37 @@ async function getExpenseSummaryLastSevenDays(req,res){
     }
 }
 
+//All Expenses overview
+async function getOverview(req,res){
+    try {
+        const {userId}=req.params
+        const expenses=await Expense.find({userId})
+        if(expenses){
+            let balance=0,totalDebit=0,totalCredit=0,totalPending=0;
+            expenses.forEach(expense=>{
+                if(expense.exp_type.toLowerCase()=="credit"){
+                    totalCredit+=expense.amount
+                }
+                else if(expense.exp_type.toLowerCase()=='debit'){
+                    totalDebit+=expense.amount
+                }
+                else if(expense.exp_type.toLowerCase()=='pending'){
+                    totalPending+=expense.amount
+                }
+            })
+            balance=totalCredit+totalPending-totalDebit;
+            res.status(200).json({totalCredit,totalDebit,totalPending,balance})
+        }
+        else{
+            res.status(404).json({"message":"No transactions found."})
+        }
+    } 
+    catch (error) {
+        console.log(error)
+        res.status(500).json({"message":error.message})
+    }
+}
+
 module.exports={
     addExpense,
     getExpenseByUserId,
@@ -151,5 +182,6 @@ module.exports={
     deleteExpense,
     getExpenseSortedByAmount,
     getExpenseSummaryLastSevenDays,
-    getExpenseSortedByExpenseDate
+    getExpenseSortedByExpenseDate,
+    getOverview
 }

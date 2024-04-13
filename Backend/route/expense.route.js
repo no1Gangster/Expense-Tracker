@@ -5,7 +5,8 @@ const{
     updateExpense,
     deleteExpense,getExpenseSortedByAmount,
     getExpenseSummaryLastSevenDays,
-    getExpenseSortedByExpenseDate
+    getExpenseSortedByExpenseDate,
+    getOverview
 }=require("../controller/expense.controller")
 
 const expenseRouter = express.Router()
@@ -17,5 +18,6 @@ expenseRouter.delete("/:userId/:expenseId",deleteExpense)
 expenseRouter.get("/:userId/sorted",getExpenseSortedByAmount)
 expenseRouter.get("/:userId/dateSorted",getExpenseSortedByExpenseDate)
 expenseRouter.get("/:userId/weekSummary",getExpenseSummaryLastSevenDays)
+expenseRouter.get("/getOverview/:userId",getOverview)
 
 module.exports = expenseRouter
