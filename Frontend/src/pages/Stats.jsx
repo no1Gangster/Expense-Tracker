@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar/Sidebar";
 import LineGraph from "../components/LineGraph";
 import CategoryPieChart from "../components/CategoryPieChart";
 import Overview from "../components/Overview";
 import ExpenseCard from "../components/ExpenseCard";
+import categorySort from "../workers/categorySort";
 
 function Stats() {
 	const data = [
@@ -172,11 +173,15 @@ function Stats() {
 	const credit = 3000;
 	const pending = 4000;
 
+	const [catData, setCatData] = useState([]);
+
+	useEffect(() => {
+		setCatData(categorySort(data));
+	}, []);
+
 	return (
-		<div
-			className="container-fluid p-0 m-0 mx-auto"
-		>
-			<Sidebar/>
+		<div className="container-fluid p-0 m-0 mx-auto">
+			<Sidebar />
 			<div className="row mb-3 w-100 mt-4 mx-auto justify-content-between">
 				<div className="dark-box mx-3 p-0 col">
 					<Overview
@@ -185,18 +190,21 @@ function Stats() {
 						pending={pending}
 					/>
 				</div>
-				<div className="dark-box col-md-6 mx-md-3 mx-3 w-auto p-md-0">Budget Details</div>
+				<div className="dark-box col mx-md-3 mx-3 p-md-5">
+					Budget Details
+				</div>
 			</div>
 			<div className="row w-100 mx-auto justify-content-between">
 				<div className="rounded col-md-7 mx-md-3 p-md-0">
-					<LineGraph />
+					<LineGraph data={data} />
 				</div>
 				<div className="rounded col mx-md-3 pt-2 p-md-0">
-					<CategoryPieChart />
+					{catData && <CategoryPieChart data={catData} />}
 				</div>
 			</div>
-			{/* <div className="">
-				<div className="container-fluid expense-list mb-5">
+			<div className="mt-5">
+				<h3 className="text-light ms-5 mb-4">Expense History</h3>
+				<div className="expense-list">
 					{data &&
 						data.map((item) => (
 							<ExpenseCard
@@ -209,7 +217,7 @@ function Stats() {
 							/>
 						))}
 				</div>
-			</div> */}
+			</div>
 		</div>
 	);
 }

@@ -23,7 +23,7 @@ function Sidebar() {
 	// }, [date]);
 
 	return (
-		<div className="dark-box" style={{height:"4svh", width:"2svw"}}>
+		<div className="ms-3 pt-2" style={{height:"4svh", width:"2svw"}}>
 			<a
 				className="btn btn-light"
 				data-bs-toggle="offcanvas"
