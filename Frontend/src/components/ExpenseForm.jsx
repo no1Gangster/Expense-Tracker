@@ -37,7 +37,7 @@ function ExpenseForm() {
 					<div className="col-lg-2">
 						<div>
 							<select
-								className="form-select bg-dark dark-input"
+								className="form-select bg-dark dark-input text-light"
 								ref={typeRef}
 							>
 								<option value="personal">Personal</option>

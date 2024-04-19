@@ -5,7 +5,7 @@ const MouseFollower = () => {
 	const [cursorY, setCursorY] = useState(0);
 	const windowWidth = window.innerWidth;
 	const windowHeight = window.innerHeight;
-	const followerSize = 50; // Adjust this value as needed for your follower element size
+	const followerSize = 0; // Adjust this value as needed for your follower element size
 
 	const handleMouseMove = (event) => {
 		let newCursorX = event.clientX;

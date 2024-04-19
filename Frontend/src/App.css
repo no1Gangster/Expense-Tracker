@@ -6,6 +6,8 @@
 	--neon-green: rgb(63, 255, 46);
 	--neon-blue: #04d9ff;
 	--dark-blue: rgb(28, 36, 95);
+	margin: 0;
+	padding: 0;
 }
 .nav-link {
 	color: var(--neon-green) !important;
@@ -81,6 +83,7 @@
 
 .dark-input {
 	caret-color: white;
+	color: white !important;
 }
 .dark-input::-webkit-input-placeholder {
 	color: grey !important;
@@ -93,7 +96,7 @@
 .card-element:hover {
 	scale: 1.03;
 	transition: 300ms;
-	outline: 2px solid white;
+	outline: 1px solid white;
 	.crud-btns {
 		display: block;
 		opacity: 1;
@@ -106,11 +109,11 @@
 }
 
 .date-inp {
-	color: grey !important;
+	color: white !important;
 }
 
 .date-inp::-webkit-input-placeholder {
-	color: white;
+	color: grey !important;
 }
 select {
 	color: grey !important;
@@ -123,50 +126,13 @@ option {
 	background-color: #363d44 !important;
 }
 
-.blob {
-	width: 400px;
-	height: 400px;
-	background: linear-gradient(var(--neon-red), var(--neon-blue));
-	z-index: 1;
-	filter: blur(150px);
-	translate: -50% -50%;
-	@media (width < 768px) {
-		display: none;
-	}
-	border-radius: 50%;
-	animation: rotate 20s infinite;
-}
-
-.blob-container {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	@media (width < 768px) {
-		overflow: auto;
-	}
-	@media (width >= 768px) {
-		overflow: hidden;
-	}
-}
-
-@keyframes rotate {
-	from {
-		rotate: 0deg;
-	}
-	50% {
-		scale: 1 1.5;
-	}
-	to {
-		rotate: 360deg;
-	}
-}
 
 .container-fluid {
 	padding-right: 0 !important;
 }
 
 .bg-vary {
-	@media(width >= 992px) {
+	@media (width >= 992px) {
 		background-color: transparent;
 	}
 	background-color: #212529;
@@ -174,4 +140,21 @@ option {
 
 .card-btns {
 	border: 1px solid black !important;
+}
+
+.dark-box {
+	background-color: #363d44;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgb(0, 0, 0);
+	color: white;
+}
+
+.color-red {
+    color: var(--base-red);
+}
+.color-green {
+    color: var(--base-green);
+}
+.color-blue {
+    color: var(--base-blue);
 }

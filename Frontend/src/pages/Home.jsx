@@ -174,57 +174,46 @@ function Home() {
 	const pending = 4000;
 
 	return (
-		<div
-			className="container-fluid bg-dark main"
-			style={{ height: "92.1svh" }}
-		>
-			<div className="blob-container">
-				<MouseFollower />
-
-				<div
-					className="row"
-					style={{ width: "99%" }}
-				>
-					<div className="col-md-4 mt-md-5 text-light">
-						<div className="d-flex justify-content-center ms-3 my-md-5 z-3 position-relative">
-							<HomePieChart
-								credit={credit}
-								debit={debit}
-								pending={pending}
-							/>
-						</div>
-						<div className="container mx-auto w-75 mb-3 pt-md-5 z-3 position-relative overview-div p-3 rounded-3">
-							<Overview
-								credit={credit}
-								debit={debit}
-								pending={pending}
-							/>
-						</div>
+		<>
+			<div
+				className="row bg-text-dark g-0"
+			>
+				<div className="col-md-4 mt-md-5 p-0 text-light">
+					<div className="d-flex justify-content-center ms-3 my-md-5 z-3 position-relative">
+						<HomePieChart
+							credit={credit}
+							debit={debit}
+							pending={pending}
+						/>
 					</div>
-					<div className="col-md-8 mt-5">
-						<h1 className="text-light px-5 mb-3 z-3 position-relative">
-							Expense History
-						</h1>
-						<div className="container-fluid expense-list ms-4 me-1">
-							{data &&
-								data.map((item) => (
-									<ExpenseCard
-										category={item.category}
-										note={item.description}
-										date={item.date}
-										expense={item.amount}
-										type={item.type}
-										key={item.id}
-									/>
-								))}
-						</div>
+					<div className="container mx-auto w-75 mb-3 pt-md-5 z-3 position-relative overview-div rounded-3">
+						<Overview
+							credit={credit}
+							debit={debit}
+							pending={pending}
+						/>
 					</div>
 				</div>
-				<div className="sticky-bottom bg-transparent mt-md-5 mb-4 pt-4 pb-md-3">
-					<ExpenseForm />
+				<div className="col-md-8 mt-md-4 mx-auto p-0">
+					<h1 className="text-light px-5 mb-3 z-3 position-relative">
+						Expense History
+					</h1>
+					<div className="container-fluid expense-list ms-4 me-1">
+						{data &&
+							data.map((item) => (
+								<ExpenseCard
+									category={item.category}
+									note={item.description}
+									date={item.date}
+									expense={item.amount}
+									type={item.type}
+									key={item.id}
+								/>
+							))}
+					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 
