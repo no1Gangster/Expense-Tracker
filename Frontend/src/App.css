@@ -40,6 +40,15 @@
 	overflow-y: scroll;
 	width: auto !important;
 }
+.expense-list-large {
+	display: flex;
+	flex-direction: column;
+	max-height: 72.7svh;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	width: auto !important;
+}
+
 .expense-list::-webkit-scrollbar {
 	background: transparent;
 	width: 0.5rem;
@@ -157,4 +166,10 @@ option {
 }
 .color-blue {
     color: var(--base-blue);
+}
+
+.pichart{
+	@media (width > 992px) {
+		scale: 1.2;
+	}
 }

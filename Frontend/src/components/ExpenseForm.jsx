@@ -1,24 +1,43 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import expenseApi from "../ApiService/Expense";
 
-function ExpenseForm() {
+function ExpenseForm({ newExpense }) {
 	const noteRef = useRef(null);
 	const amtRef = useRef(null);
 	const dateRef = useRef(null);
 	const typeRef = useRef(null);
-	function handleSubmit(e) {
-        e.preventDefault();
-        let obj = {note : noteRef.current.value,
-                    amount : amtRef.current.value,
-                    date : dateRef.current.value,
-                    type : typeRef.current.value};
-		console.log(obj);
+	const catRef = useRef(null);
 
-        noteRef.current.value = null
-        amtRef.current.value = null
-        dateRef.current.value = null
+	async function setDate() {
+		let todays_date = await String(new Date().toJSON().slice(0, 10));
+		dateRef.current.value = todays_date;
+	}
+	
+	useEffect(()=> {
+		setDate();
+	}, []);
+
+	async function handleSubmit(e) {
+		e.preventDefault();
+		let obj = {
+			userId: import.meta.env.VITE_ROLL_NO,
+			note: noteRef.current.value,
+			amount: amtRef.current.value,
+			exp_date: dateRef.current.value,
+			exp_type: typeRef.current.value,
+			exp_category: catRef.current.value,
+		};
+		let res = await expenseApi.addExpense(obj);
+
+		res.status ? console.log("\nData Added") : console.log(res.status);
+
+		newExpense(obj);
+
+		noteRef.current.value = null;
+		amtRef.current.value = null;
 	}
 	return (
-		<div className="form-dock rounded-2 mt-md-2 p-2 text-white bg-vary">
+		<div className="form-dock rounded-2 mx-2 w-auto mt-md-2 p-2 text-white bg-vary">
 			<form
 				method="post"
 				onSubmit={handleSubmit}
@@ -31,6 +50,7 @@ function ExpenseForm() {
 								className="form-control bg-dark dark-input"
 								placeholder="Description"
 								ref={noteRef}
+								required
 							/>
 						</div>
 					</div>
@@ -38,24 +58,27 @@ function ExpenseForm() {
 						<div>
 							<select
 								className="form-select bg-dark dark-input text-light"
-								ref={typeRef}
+								ref={catRef}
 							>
 								<option value="personal">Personal</option>
 								<option value="food">Food</option>
 								<option value="utility">Utility</option>
 								<option value="medical">Medical</option>
-								<option value="medical">Other...</option>
+								<option value="other">Other...</option>
 							</select>
 						</div>
 					</div>
 					<div className="col">
 						<div className="input-group">
-							<span className="input-group-text bg-dark text-light">₹</span>
+							<span className="input-group-text bg-dark text-light">
+								₹
+							</span>
 							<input
 								type="number"
 								className="form-control bg-dark amount-enter dark-input text-light"
 								placeholder="Amount"
 								ref={amtRef}
+								required
 							/>
 						</div>
 					</div>
@@ -65,6 +88,7 @@ function ExpenseForm() {
 								type="date"
 								className="form-control bg-dark dark-input date-inp"
 								ref={dateRef}
+								required
 							/>
 						</div>
 					</div>
@@ -81,13 +105,11 @@ function ExpenseForm() {
 						</div>
 					</div>
 					<div className="col-1">
-						<div>
-							<input
-								type="submit"
-								className="btn btn-success"
-								value="Add Expense"
-							/>
-						</div>
+						<input
+							type="submit"
+							className="btn btn-success"
+							value="Add Expense"
+						/>
 					</div>
 				</div>
 			</form>

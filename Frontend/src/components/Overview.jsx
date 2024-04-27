@@ -5,8 +5,8 @@ function Overview({ credit, debit, pending }) {
 		<div className="p-3">
 			<h2>Expense Overview</h2>
 			<div className="container">
-				<p className="color-red">Total Credit: {credit}</p>
-				<p className="color-green">Total Debit: {debit}</p>
+				<p className="color-green">Total Credit: {credit}</p>
+				<p className="color-red">Total Debit: {debit}</p>
 				<p className="color-blue">Total Pending: {pending}</p>
 			</div>
 		</div>

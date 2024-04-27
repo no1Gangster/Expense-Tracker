@@ -8,7 +8,7 @@ function Navbar() {
 				<div className="container-fluid text-bg-grey position-relative">
 					<Link
 						className="navbar-brand"
-						to="#"
+						to="/"
 					>
 						<img src="/logo.svg" alt="" />
 					</Link>

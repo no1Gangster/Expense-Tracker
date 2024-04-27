@@ -70,14 +70,6 @@ function Sidebar() {
 									name="flexRadioDefault"
 									defaultChecked
 								/>
-								<label className="form-check-label">All</label>
-							</div>
-							<div className="form-check">
-								<input
-									className="form-check-input"
-									type="radio"
-									name="flexRadioDefault"
-								/>
 								<label className="form-check-label color-red">
 									Debit
 								</label>

@@ -113,8 +113,8 @@ export default class HomePieChart extends PureComponent {
 					height="100%"
 				>
 					<PieChart
-						width={400}
-						height={400}
+						width={500}
+						height={500}
 					>
 						<Pie
 							activeIndex={this.state.activeIndex}
@@ -122,8 +122,8 @@ export default class HomePieChart extends PureComponent {
 							data={data}
 							cx="50%"
 							cy="50%"
-							innerRadius={60}
-							outerRadius={80}
+							innerRadius={50}
+							outerRadius={70}
 							fill="#8884d8"
 							dataKey="value"
 							onMouseEnter={this.onPieEnter}

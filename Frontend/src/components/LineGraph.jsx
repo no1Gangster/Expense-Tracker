@@ -16,39 +16,36 @@ export default function LineGraph({ data }) {
 			style={{ height: "31svh" }}
 			className="dark-box p-4"
 		>
-			<ResponsiveContainer
-				width="100%"
-				height="90%"
-			>
-				<LineChart
-					width={400}
-					height={300}
-					data={data}
-					margin={{
-						top: 5,
-						right: 5,
-						left: 0,
-						bottom: 0,
-					}}
+			<div style={{ width: "100%" }}>
+				<ResponsiveContainer
+					width="100%"
+					height={200}
 				>
-					<CartesianGrid strokeDasharray="2 3" />
-					<XAxis dataKey="date" />
-					<YAxis />
-					<Tooltip />
-					<Legend />
-					<Line
-						type="monotone"
-						dataKey="id"
-						stroke="#8884d8"
-						activeDot={{ r: 8 }}
-					/>
-					<Line
-						type="monotone"
-						dataKey="amount"
-						stroke="#82ca9d"
-					/>
-				</LineChart>
-			</ResponsiveContainer>
+					<LineChart
+						width={500}
+						height={200}
+						data={data}
+						margin={{
+							top: 10,
+							right: 30,
+							left: 0,
+							bottom: 0,
+						}}
+					>
+						<CartesianGrid strokeDasharray="3 3" />
+						<XAxis dataKey="exp_date" tick={{fill:'white'}}/>
+						<YAxis />
+						<Tooltip labelStyle={{color : 'black'}}/>
+						<Line
+							connectNulls
+							type="monotone"
+							dataKey="amount"
+							stroke="#8884d8"
+							fill="#8884d8"
+						/>
+					</LineChart>
+				</ResponsiveContainer>
+			</div>
 		</div>
 	);
 }

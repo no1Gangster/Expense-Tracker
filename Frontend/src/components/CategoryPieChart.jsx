@@ -34,7 +34,7 @@ const renderCustomizedLabel = ({
 				textAnchor={x > cx ? "start" : "end"}
 				dominantBaseline="central"
 			>
-				{`${payload.category}`}
+				{`${payload.name}`}
 			</text>
 			<text
 				x={x}
@@ -43,14 +43,13 @@ const renderCustomizedLabel = ({
 				textAnchor={x > cx ? "start" : "end"}
 				dominantBaseline="central"
 			>
-				{payload.neg ? `-` : ``}{`${(percent * 100).toFixed(0)}%`}
+				{`${(percent * 100).toFixed(2)}%`}
 			</text>
 		</>
 	);
 };
 
-const CategoryPieChart = ({data}) => {
-	console.log(data);
+const CategoryPieChart = ({ data }) => {
 	return (
 		<div
 			className="dark-box"
@@ -72,7 +71,7 @@ const CategoryPieChart = ({data}) => {
 						label={renderCustomizedLabel}
 						outerRadius={120}
 						fill="#8884d8"
-						dataKey="net"
+						dataKey="value"
 					>
 						{data.map((entry, index) => (
 							<Cell
