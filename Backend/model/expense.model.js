@@ -7,12 +7,13 @@ const expenseSchema = new mongoose.Schema({
         ref:"User",
         required:true
     },
-    date:{
-        type:String,
-        required:true
-    },
     amount:{
         type:Number,
+        required:true
+    },
+    //to be changed to date type from calender input
+    exp_date:{
+        type:String,
         required:true
     },
     exp_category:{
@@ -28,6 +29,7 @@ const expenseSchema = new mongoose.Schema({
     createdAt: Date
 })
 
+//middleware --> set timestamp to ist
 expenseSchema.pre("save",function(next){
     const nowUTC = moment.utc()
     const nowIST = nowUTC.add(5,"hours").add(30,"minutes").tz("Asia/Kolkata")
