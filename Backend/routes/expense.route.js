@@ -6,7 +6,12 @@ const{
     deleteExpense,getExpenseSortedByAmount,
     getExpenseSummaryLastSevenDays,
     getExpenseSortedByExpenseDate,
-    getOverview
+    getOverview,
+    filterExpenseByDate,
+    filterExpenseByMonth,
+    filterExpenseByYear,
+    filterExpenseByType,
+    filterExpenseByCategory
 }=require("../controller/expense.controller")
 
 const expenseRouter = express.Router()

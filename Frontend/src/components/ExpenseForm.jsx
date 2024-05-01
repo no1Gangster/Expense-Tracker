@@ -79,6 +79,7 @@ function ExpenseForm({ newExpense }) {
 								placeholder="Amount"
 								ref={amtRef}
 								required
+								min={1}
 							/>
 						</div>
 					</div>

@@ -27,21 +27,35 @@ export default function LineGraph({ data }) {
 						data={data}
 						margin={{
 							top: 10,
-							right: 30,
+							right:50,
 							left: 0,
 							bottom: 0,
 						}}
 					>
 						<CartesianGrid strokeDasharray="3 3" />
-						<XAxis dataKey="exp_date" tick={{fill:'white'}}/>
+						<XAxis dataKey="date" tick={{fill:'white'}}/>
 						<YAxis />
 						<Tooltip labelStyle={{color : 'black'}}/>
 						<Line
 							connectNulls
 							type="monotone"
-							dataKey="amount"
-							stroke="#8884d8"
-							fill="#8884d8"
+							dataKey="debit"
+							stroke="#f28b82"
+							fill="#f28b82"
+						/>
+						<Line
+							connectNulls
+							type="monotone"
+							dataKey="credit"
+							stroke="#00f3bd"
+							fill="#00f3bd"
+						/>
+						<Line
+							connectNulls
+							type="monotone"
+							dataKey="pending"
+							stroke="#596cff"
+							fill="#596cff"
 						/>
 					</LineChart>
 				</ResponsiveContainer>

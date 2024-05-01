@@ -7,7 +7,7 @@ import ExpenseCard from "../components/ExpenseCard";
 import expenseApi from "../ApiService/Expense";
 import expenseOverview from "../workers/expenseOverview";
 import ExpenseForm from "../components/ExpenseForm";
-import catgegoryWiseNet from "../workers/expenseSort";
+import catgegoryWiseNet, { expenseSplit } from "../workers/expenseSort";
 
 function Stats() {
 	const [data, setData] = useState([]);
@@ -15,8 +15,10 @@ function Stats() {
 	const [overview, setOverview] = useState({});
 
 	const id = import.meta.env.VITE_ROLL_NO;
+	
 	const [catData, setCatData] = useState([]);
 	const [update, setUpdate] = useState([]);
+	const [typeData, setTypeData] = useState([]);
 
 	const [expType, setExpType] = useState("All");
 
@@ -32,6 +34,8 @@ function Stats() {
 
 			let sortData = await catgegoryWiseNet(res.data, expType);
 			setCatData(sortData);
+
+			setTypeData(expenseSplit(res.data));
 		} catch (error) {
 			console.log("Error: " + error);
 		}
@@ -70,8 +74,8 @@ function Stats() {
 				</div>
 			</div>
 			<div className="row w-100 mx-auto justify-content-between">
-				<div className="rounded col-md-7 ms-md-3 p-md-0 color-light">
-					<LineGraph data={data} />
+				<div className="rounded col-md-7 ms-md-3 p-md-0 color-light" >
+					<LineGraph data={typeData} />
 				</div>
 				<div className="rounded col mx-md-3 pt-2 p-md-0">
 					{catData && <CategoryPieChart data={catData} />}

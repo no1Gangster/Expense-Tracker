@@ -7,6 +7,8 @@ export default async function catgegoryWiseNet(data, exp_type) {
 		other: 0,
 	};
 
+	console.log(data)
+
 	if (exp_type == "All") {
 		data.forEach((expense) => {
 			if (expense.exp_category == "personal") {
@@ -66,5 +68,40 @@ function format(dataObj) {
 	];
 
 	newData = newData.filter((item) => item.value > 0);
+	return newData;
+}
+
+export function expenseSplit(data) {
+	let newData = data.map((item) => ({
+		date: item.exp_date,
+		credit: 0,
+		debit: 0,
+		pending: 0,
+	}));
+
+	for (let i = 0; i < data.length; i++) {
+		for (let j = 0; j < newData.length; j++) {
+			if (data[i].exp_date === newData[j].date) {
+				if (data[i].exp_type === "debit") {
+					newData[j].debit = data[i].amount;
+				} else if (data[i].exp_type === "credit") {
+					newData[j].credit = data[i].amount;
+				} else if (data[i].exp_type === "pending") {
+					newData[j].pending = data[i].amount;
+				}
+			}
+		}
+	}
+
+	// Remove duplicate entries
+	for (let i = 0; i < newData.length; i++) {
+		for (let j = i + 1; j < newData.length; j++) {
+			if (newData[i].date === newData[j].date) {
+				newData.splice(j, 1);
+				j--;
+			}
+		}
+	}
+
 	return newData;
 }
