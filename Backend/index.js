@@ -21,4 +21,4 @@ app.get("/",(req,res)=>{
 })
 
 dbConnect()
-app.listen(PORT,()=>console.log("http://localhost:3000"))
+app.listen(PORT,()=>console.log(`http://localhost:${PORT}`))
