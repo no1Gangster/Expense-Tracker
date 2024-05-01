@@ -1,0 +1,175 @@
+:root {
+	--base-blue: rgb(89, 108, 255);
+	--base-green: rgb(0, 243, 189);
+	--base-red: rgb(242, 139, 130);
+	--neon-red: #ff004d;
+	--neon-green: rgb(63, 255, 46);
+	--neon-blue: #04d9ff;
+	--dark-blue: rgb(28, 36, 95);
+	margin: 0;
+	padding: 0;
+}
+.nav-link {
+	color: var(--neon-green) !important;
+}
+.navbar-items :hover {
+	border-bottom: 1px solid var(--neon-red);
+	padding-bottom: 2px;
+	color: var(--neon-red) !important;
+}
+
+.btn-neon {
+	background-color: var(--dark-blue) !important;
+	color: var(--neon-green) !important;
+}
+
+.btn-neon:hover {
+	background-color: black !important;
+	color: var(--neon-red) !important;
+}
+
+.row-span-2 {
+	grid-row: span 2;
+}
+
+.expense-list {
+	display: flex;
+	flex-direction: column;
+	height: 72.7svh;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	width: auto !important;
+}
+.expense-list-large {
+	display: flex;
+	flex-direction: column;
+	max-height: 72.7svh;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	width: auto !important;
+}
+
+.expense-list::-webkit-scrollbar {
+	background: transparent;
+	width: 0.5rem;
+	border-radius: 100vw;
+}
+
+.expense-list::-webkit-scrollbar-track {
+	background: grey;
+	width: 0.5rem;
+	border-radius: 100vw;
+	margin-block: 0.2svh;
+}
+
+.expense-list::-webkit-scrollbar-thumb {
+	margin-block: 20px;
+	background: rgba(245, 245, 245, 0.74);
+	width: 0.5rem;
+	border-radius: 100vw;
+}
+
+.expense-list::-webkit-scrollbar-thumb:hover {
+	cursor: pointer;
+}
+
+.form-dock {
+	width: 95svw;
+	border: 1px solid grey;
+	margin: auto;
+	box-shadow: 0 0 100px black;
+}
+
+.amount-enter::-webkit-inner-spin-button,
+.amount-enter::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.amount-enter {
+	background-color: black !important;
+}
+
+.dark-input {
+	caret-color: white;
+	color: white !important;
+}
+.dark-input::-webkit-input-placeholder {
+	color: grey !important;
+}
+.card-element {
+	background-color: #363d44 !important;
+	box-shadow: 0 0 3px black;
+	cursor: pointer;
+}
+.card-element:hover {
+	scale: 1.03;
+	transition: 300ms;
+	outline: 1px solid white;
+	.crud-btns {
+		display: block;
+		opacity: 1;
+	}
+}
+
+.crud-btns {
+	opacity: 0;
+	transition: opacity 400ms ease-in;
+}
+
+.date-inp {
+	color: white !important;
+}
+
+.date-inp::-webkit-input-placeholder {
+	color: grey !important;
+}
+select {
+	color: grey !important;
+}
+option {
+	color: white;
+}
+
+.overview-div {
+	background-color: #363d44 !important;
+}
+
+
+.container-fluid {
+	padding-right: 0 !important;
+}
+
+.bg-vary {
+	@media (width >= 992px) {
+		background-color: transparent;
+	}
+	background-color: #212529;
+}
+
+.card-btns {
+	border: 1px solid black !important;
+}
+
+.dark-box {
+	background-color: #363d44;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgb(0, 0, 0);
+	color: white;
+}
+
+.color-red {
+    color: var(--base-red);
+}
+.color-green {
+    color: var(--base-green);
+}
+.color-blue {
+    color: var(--base-blue);
+}
+
+.pichart{
+	@media (width > 992px) {
+		scale: 1.2;
+	}
+}
