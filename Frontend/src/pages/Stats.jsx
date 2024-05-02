@@ -6,93 +6,98 @@ import Overview from "../components/Overview";
 import ExpenseCard from "../components/ExpenseCard";
 import expenseApi from "../ApiService/Expense";
 import expenseOverview from "../workers/expenseOverview";
-import ExpenseForm from "../components/ExpenseForm";
-import catgegoryWiseNet, { expenseSplit } from "../workers/expenseSort";
-import PieChart from "../components/PieChart";
+import catgegoryWiseNet, { expenseTypeWiseSplit } from "../workers/expenseSort";
+import { useAuth } from "../Context/AuthContext";
 
 function Stats() {
-	const [data, setData] = useState([]);
+	const authContext = useAuth();
+	let { isLoggedIn, id } = authContext;
 
-	const [overview, setOverview] = useState({});
+	const [expenses, setExpenses] = useState([]);
+	const [update, setUpdate] = useState(0);
+	const [overview, setOverview] = useState([]);
+	const [expTypeData, setExpTypeData] = useState([]);
+	const [expCatData, setExpCatData] = useState([]);
 
-	const id = import.meta.env.VITE_ROLL_NO;
-	
-	const [catData, setCatData] = useState([]);
-	const [update, setUpdate] = useState([]);
-	const [typeData, setTypeData] = useState([]);
+	const [sidebarExpType, setSidebarExpType] = useState("all");
 
-	const [expType, setExpType] = useState("All");
-
-	const nd = {
-		labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-		values: [12, 19, 3, 5, 2, 3],
-	  };
-
-	async function getExpenses(id) {
+	//Fetches expenses list and sets it in expenses state variable
+	async function fetchData() {
 		try {
 			let res = await expenseApi.getExpenses(id);
-			res.status ? setData(res.data) : console.log("404 Data Not Found");
-
-			console.log(res.data)
-
-			let newData = await expenseOverview(res.data);
-			setOverview(newData);
-
-			let sortData = await catgegoryWiseNet(res.data, expType);
-			setCatData(sortData);
-
-			setTypeData(expenseSplit(res.data));
+			setExpenses(res.data);
 		} catch (error) {
-			console.log("Error: " + error);
+			console.log("Failed to fetch data at Stats Page\n" + error);
 		}
 	}
 
-	function deleteData(id) {
-		const newData = data.filter((expense) => expense._id != id);
-		console.log(newData);
-		setData(newData);
-		setUpdate(newData);
+	//Calculates Total Credit, Total Debit and Total Pending for the expenses in the expenses state variable
+	async function calculateOverview() {
+		let res = expenseOverview(expenses);
+		setOverview(res);
 	}
 
-	function addData(add) {
-		const newData = [add, ...data];
-		setData(newData);
-		setUpdate(newData);
+	//Separates data into credit, debit, pending date wise which is used by LineGraph
+	async function expenseTypeData() {
+		let res = await expenseTypeWiseSplit(expenses);
+		setExpTypeData(res);
 	}
 
+	//Separates expenses into categories and corresponding net expenses, which is used by PieChart
+	async function expenseCategoryData() {
+		let res = await catgegoryWiseNet(expenses, sidebarExpType);
+		setExpCatData(res);
+	}
+
+	//Used to update state variable for refreshing dependent components
+	function refreshExpenseHistory() {
+		setUpdate(update + 1);
+	}
+
+	//Expenses are fetched inititally on page load.
+	//Later if new data added or removed, the components are re-rendered with new data.
 	useEffect(() => {
-		getExpenses(id);
-	}, [update]);
+		fetchData();
+	}, [isLoggedIn, id, update,sidebarExpType]);
+
+	//After expenses are fetched, its corresponding overview is calculated
+	useEffect(() => {
+		calculateOverview();
+		expenseTypeData();
+		expenseCategoryData();
+	}, [expenses]);
 
 	return (
 		<div className="container-fluid p-0 m-0 mx-auto">
 			<Sidebar />
 			<div className="row mb-3 w-100 mt-4 mx-auto justify-content-between">
 				<div className="dark-box ms-3 ps-4 col">
-					<Overview
-						credit={overview.credit}
-						debit={overview.debit}
-						pending={overview.pending}
-					/>
+					{/* Displays overview data */}
+					{overview && (
+						<Overview
+							credit={overview.credit}
+							debit={overview.debit}
+							pending={overview.pending}
+						/>
+					)}
 				</div>
 				<div className="dark-box col mx-md-3 mx-3 p-md-5">
 					Budget Details
 				</div>
 			</div>
 			<div className="row w-100 mx-auto justify-content-between">
-				<div className="rounded col-md-7 ms-md-3 p-md-0 color-light" >
-					<LineGraph data={typeData} />
+				<div className="rounded col-md-7 ms-md-3 p-md-0 color-light">
+					{expTypeData && <LineGraph data={expTypeData} />}
 				</div>
 				<div className="rounded col mx-md-3 pt-2 p-md-0">
-					{catData && <CategoryPieChart data={catData} />}
-					{/* <PieChart data={nd}/> */}
+					{expCatData && <CategoryPieChart data={expCatData} />}
 				</div>
 			</div>
 			<div className="my-5 pb-md-3 pb-5 mx-1">
 				<h3 className="text-light ms-5 mb-4">Expense History</h3>
 				<div className="expense-list">
-					{data &&
-						data.map((item) => (
+					{expenses &&
+						expenses.map((item) => (
 							<ExpenseCard
 								category={item.exp_category}
 								note={item.note}
@@ -100,15 +105,11 @@ function Stats() {
 								expense={item.amount}
 								type={item.exp_type}
 								_id={item._id}
-								update={deleteData}
+								update={refreshExpenseHistory}
 								key={item._id}
 							/>
 						))}
 				</div>
-			</div>
-
-			<div className="sticky-bottom bg-transparent my-md-0 py-md-0 mt-5 mb-4 pt-4 pb-md-3 bottom-0">
-				<ExpenseForm newExpense={addData} />
 			</div>
 		</div>
 	);

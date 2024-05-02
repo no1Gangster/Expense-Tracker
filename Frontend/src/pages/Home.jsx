@@ -22,7 +22,6 @@ function Home() {
 		try {
 			let res = await expenseApi.getExpenses(id);
 			setExpenses(res.data);
-			console.log(res);
 		} catch (error) {
 			console.log("Failed to fetch data at homepage\n" + error);
 		}
@@ -31,7 +30,7 @@ function Home() {
 
 	//Calculates Total Credit, Total Debit and Total Pending for the expenses in the expenses state variable
 	async function calculateOverview() {
-		let res = expenseOverview(expenses);
+		let res = await expenseOverview(expenses);
 		setOverview(res);
 		console.log(res);
 	}

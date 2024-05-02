@@ -9,7 +9,7 @@ export default async function catgegoryWiseNet(data, exp_type) {
 
 	console.log(data)
 
-	if (exp_type == "All") {
+	if (exp_type == "all") {
 		data.forEach((expense) => {
 			if (expense.exp_category == "personal") {
 				if (expense.exp_type == "debit")
@@ -71,7 +71,7 @@ function format(dataObj) {
 	return newData;
 }
 
-export function expenseSplit(data) {
+export function expenseTypeWiseSplit(data) {
 	let newData = data.map((item) => ({
 		date: item.exp_date,
 		credit: 0,
