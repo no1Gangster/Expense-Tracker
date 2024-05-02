@@ -14,6 +14,10 @@ function Sidebar() {
 		},
 	]);
 
+	function showValue(e) {
+		console.log(e.target.value);
+	}
+
 	// useEffect(() => {
 	// 	console.log(
 	// 		format(date[0].startDate, "yyyy-MM-dd") +
@@ -23,7 +27,10 @@ function Sidebar() {
 	// }, [date]);
 
 	return (
-		<div className="ms-3 pt-2" style={{height:"4svh", width:"2svw"}}>
+		<div
+			className="ms-3 pt-2"
+			style={{ height: "4svh", width: "2svw" }}
+		>
 			<a
 				className="btn btn-light"
 				data-bs-toggle="offcanvas"
@@ -40,7 +47,10 @@ function Sidebar() {
 				id="offcanvasExample"
 				aria-labelledby="offcanvasExampleLabel"
 			>
-				<div className="offcanvas-header" data-bs-theme="dark">
+				<div
+					className="offcanvas-header"
+					data-bs-theme="dark"
+				>
 					<h5
 						className="offcanvas-title"
 						id="offcanvasExampleLabel"
@@ -52,7 +62,7 @@ function Sidebar() {
 						className="btn-close"
 						data-bs-dismiss="offcanvas"
 						aria-label="Close"
-                        color=""
+						color=""
 					></button>
 				</div>
 				<div className="offcanvas-body">
@@ -67,8 +77,23 @@ function Sidebar() {
 								<input
 									className="form-check-input"
 									type="radio"
-									name="flexRadioDefault"
+									name="ExpType"
+									onChange={showValue}
+									value={"all"}
 									defaultChecked
+								/>
+								<label className="form-check-label color-light">
+									All
+								</label>
+							</div>
+							<div className="form-check">
+								<input
+									className="form-check-input"
+									type="radio"
+									onChange={showValue}
+									value={"debit"}
+									name="ExpType"
+									
 								/>
 								<label className="form-check-label color-red">
 									Debit
@@ -78,7 +103,9 @@ function Sidebar() {
 								<input
 									className="form-check-input"
 									type="radio"
-									name="flexRadioDefault"
+									onChange={showValue}
+									value={"credit"}
+									name="ExpType"
 								/>
 								<label className="form-check-label color-green">
 									Credit
@@ -88,7 +115,9 @@ function Sidebar() {
 								<input
 									className="form-check-input"
 									type="radio"
-									name="flexRadioDefault"
+									onChange={showValue}
+									value={"pending"}
+									name="ExpType"
 								/>
 								<label className="form-check-label color-blue">
 									Pending
@@ -109,8 +138,8 @@ function Sidebar() {
 									direction="vertical"
 								/>
 							</div>
-                            <br />
-                            <br />
+							<br />
+							<br />
 							<div className="input-group mb-3">
 								<input
 									type="text"
@@ -124,11 +153,19 @@ function Sidebar() {
 									type="button"
 									id="button-addon2"
 								>
-									<img src="/search-icon-white.png" alt="" width={"15svw"} />
+									<img
+										src="/search-icon-white.png"
+										alt=""
+										width={"15svw"}
+									/>
 								</button>
 							</div>
 							<div>
-								<input type="submit" className="btn btn-success" value="Apply Filters"/>
+								<input
+									type="submit"
+									className="btn btn-success"
+									value="Apply Filters"
+								/>
 							</div>
 						</form>
 					</div>

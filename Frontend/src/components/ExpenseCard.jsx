@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import expenseApi from "../ApiService/Expense";
+import { AuthContext } from "../Context/AuthContext";
 
 function ExpenseCard({ category, note, date, expense, type, _id, update }) {
+	//Get Context Variables
+	let authContext = useContext(AuthContext);
+	let { id } = authContext;
+
 	let styled_type = type.charAt(0).toUpperCase() + type.slice(1);
 	let style = {};
 	let sign = "";
 	let img_url = "";
+
+	//Set Expense Colour
 	if (type === "debit") {
 		style = { color: "rgb(242, 139, 130)" };
 		sign = "-";
@@ -14,17 +21,20 @@ function ExpenseCard({ category, note, date, expense, type, _id, update }) {
 		sign = "+";
 	} else style = { color: "rgb(89, 108, 255)" };
 
+	//Set Category Image
 	if (category === "food") img_url = "/food-cat.png";
 	else if (category === "utility") img_url = "/utility-cat.png";
 	else if (category === "personal") img_url = "/personal-cat.png";
 	else if (category === "medical") img_url = "/medical-cat.png";
 	else img_url = "/other-cat.png";
-	
-	async function deleteExpense(id) {
-		let res = await expenseApi.deleteExpense(id);
-		res.status ? console.log("Delete Successfully") : console.log("Error")
-		update(id);
+
+	//Delete Expense
+	async function deleteExpense(expenseId, userId) {
+		let res = await expenseApi.deleteExpense(expenseId, userId);
+		res.status ? console.log("Delete Successfully") : console.log("Error");
+		update();
 	}
+
 	return (
 		<div className="container mb-3 px-2 z-3 position-relative">
 			<div className="card px-md-5 card-element text-white">
@@ -63,7 +73,9 @@ function ExpenseCard({ category, note, date, expense, type, _id, update }) {
 								</button>
 								<button
 									className="btn btn-danger mx-1 card-btns"
-									onClick={()=>{deleteExpense(_id)}}
+									onClick={() => {
+										deleteExpense(_id, id);
+									}} //deleteExpense(expense._id, user.id)
 								>
 									<img
 										src="/bin-icon.png"

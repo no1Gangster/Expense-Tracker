@@ -8,6 +8,7 @@ import expenseApi from "../ApiService/Expense";
 import expenseOverview from "../workers/expenseOverview";
 import ExpenseForm from "../components/ExpenseForm";
 import catgegoryWiseNet, { expenseSplit } from "../workers/expenseSort";
+import PieChart from "../components/PieChart";
 
 function Stats() {
 	const [data, setData] = useState([]);
@@ -21,6 +22,11 @@ function Stats() {
 	const [typeData, setTypeData] = useState([]);
 
 	const [expType, setExpType] = useState("All");
+
+	const nd = {
+		labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+		values: [12, 19, 3, 5, 2, 3],
+	  };
 
 	async function getExpenses(id) {
 		try {
@@ -79,6 +85,7 @@ function Stats() {
 				</div>
 				<div className="rounded col mx-md-3 pt-2 p-md-0">
 					{catData && <CategoryPieChart data={catData} />}
+					{/* <PieChart data={nd}/> */}
 				</div>
 			</div>
 			<div className="my-5 pb-md-3 pb-5 mx-1">

@@ -25,10 +25,10 @@ class ExpenseApi {
 		}
 	}
 
-	async deleteExpense(id) {
-		console.log(id);
+	async deleteExpense(expenseId, userId) {
+		console.log(expenseId, userId);
 		try {
-			let obj = await axios.delete(`${this.api}/expense/${import.meta.env.VITE_ROLL_NO}/${id}`);
+			let obj = await axios.delete(`${this.api}/expense/${userId}/${expenseId}`);
 			console.log("Data Deleted Successfully")
 			return { data : obj.data, status : true};
 		} catch (error) {
