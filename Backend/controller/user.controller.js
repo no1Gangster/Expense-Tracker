@@ -99,6 +99,7 @@ async function checkBudgetStatus(userId){
     }
 }
 
+//Budget status router handler
 async function getBudgetStatusInfo(req,res){
     try{
         const {userId} = req.params
