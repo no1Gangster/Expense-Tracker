@@ -7,9 +7,15 @@ export default async function catgegoryWiseNet(data, exp_type) {
 		other: 0,
 	};
 
-	console.log(data)
-
-	if (exp_type == "All") {
+	if (exp_type == "credit" || exp_type == "debit" || exp_type == "pending") {
+		data.forEach((expense) => {
+			if (expense.exp_category == "personal") categoryExp.personal += expense.amount
+			if (expense.exp_category == "food") categoryExp.food += expense.amount
+			if (expense.exp_category == "utility") categoryExp.utility += expense.amount
+			if (expense.exp_category == "medical") categoryExp.medical += expense.amount
+			if (expense.exp_category == "other") categoryExp.other += expense.amount
+		})
+	} else {
 		data.forEach((expense) => {
 			if (expense.exp_category == "personal") {
 				if (expense.exp_type == "debit")
@@ -71,7 +77,7 @@ function format(dataObj) {
 	return newData;
 }
 
-export function expenseSplit(data) {
+export function expenseTypeWiseSplit(data) {
 	let newData = data.map((item) => ({
 		date: item.exp_date,
 		credit: 0,

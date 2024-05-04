@@ -1,16 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../Context/AuthContext";
 
 function Navbar() {
+	const authContext = useAuth();
+	const { id, isLoggedIn, login, logout } = authContext;
+	function handleLogin(e) {
+		login();
+		console.log({ id, isLoggedIn });
+	}
+	function handleLogout(e) {
+		logout();
+		console.log({ id, isLoggedIn });
+	}
 	return (
-		<div style={{marginBottom:"75px"}}>
-			<nav className="navbar navbar-expand-lg navbar-expand-md bg-body-tertiary fixed-top" data-bs-theme="dark">
+		<div style={{ marginBottom: "75px" }}>
+			<nav
+				className="navbar navbar-expand-lg navbar-expand-md bg-body-tertiary fixed-top"
+				data-bs-theme="dark"
+			>
 				<div className="container-fluid text-bg-grey position-relative">
 					<Link
 						className="navbar-brand"
 						to="/"
 					>
-						<img src="/logo.svg" alt="" />
+						<img
+							src="/logo.svg"
+							alt=""
+						/>
 					</Link>
 					<button
 						className="navbar-toggler order-2"
@@ -67,7 +84,21 @@ function Navbar() {
 							</ul>
 						</div>
 					</div>
-					<button className="btn btn-neon ms-auto me-2">Login</button>
+					{!isLoggedIn ? (
+						<button
+							className="btn btn-neon ms-auto me-2"
+							onClick={handleLogin}
+						>
+							Log In
+						</button>
+					) : (
+						<button
+							className="btn btn-neon ms-auto me-2"
+							onClick={handleLogout}
+						>
+							Log Out
+						</button>
+					)}
 				</div>
 			</nav>
 		</div>

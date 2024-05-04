@@ -1,7 +1,5 @@
-const mongoose = require('mongoose')
 const User = require("../model/user.model");
 const Expense = require("../model/expense.model");
-// const { getOverview } = require('./expense.controller');
 
 //Post a user detail
 async function addUser(req,res){
@@ -12,6 +10,17 @@ async function addUser(req,res){
     catch(error){
         console.log(error);
         res.status(400).json({"message":error.message})
+    }
+}
+
+//get all users
+async function getUsers(req,res){
+    try{
+        const users = await User.find()
+        res.status(200).json(users)
+    }catch(error){
+        console.log(error);
+        res.status(500).json(error)
     }
 }
 
@@ -55,12 +64,11 @@ async function addBudget(req,res){
 }
 
 //Budget tracking
-async function checkBudgetStatus(req,res){
+async function checkBudgetStatus(userId){
     try{
-        const {userId} = req.params
         const user = await User.findById(userId)
-        if(!user){
-            return res.status(404).json({"message":"User not found"})
+        if(!user || !user.budget){
+            return { status: "error", message: "User not found or budget not set" };
         }
         const userBudget = user.budget
         const startDate = user.startDate
@@ -81,11 +89,39 @@ async function checkBudgetStatus(req,res){
             }
         })
         const balance = Math.abs(totalCredit - totalDebit + totalPending)
-        const budgetStatus = userBudget >= totalDebit? `Within budget limit set between ${startDate} and ${endDate}`:`Exceeded budget limit set between ${startDate} and ${endDate}. Over budget by Rs.${totalDebit-userBudget}`
-        res.status(200).json({userBudget:userBudget,totalDebit:totalDebit,balance:balance,budgetStatus:budgetStatus})
-    }catch(error){
+        const budgetExhausted = totalDebit/userBudget
+        let budgetStatus=""
+
+        if(budgetExhausted>=0.5 && budgetExhausted<0.9){
+            budgetStatus = `You have reached 50% of your budget limit set between ${startDate} and ${endDate}.You are Rs.${userBudget-totalDebit} away from over spending`
+        }else if(budgetExhausted>=0.9 && budgetExhausted<1){
+            budgetStatus = `You have reached 90% of your budget limit set between ${startDate} and ${endDate}.You are Rs.${userBudget-totalDebit} away from over spending`
+        }else{
+            budgetStatus = userBudget >= totalDebit? `Within budget limit set between ${startDate} and ${endDate}`:`Exceeded budget limit set between ${startDate} and ${endDate}. Over budget by Rs.${totalDebit-userBudget}` 
+        }
+        console.log(user.email);
+        
+        return {userBudget:userBudget,totalDebit:totalDebit,balance:balance,budgetStatus:budgetStatus,status:"success"}
+    }catch(error){  
+        console.log(error); 
+        return {status:"error",message:error.message}
+    }
+}
+
+//Budget status router handler
+async function getBudgetStatusInfo(req,res){
+    try{
+        const {userId} = req.params
+        const budgetInfo = await checkBudgetStatus(userId)
+        if(budgetInfo.status === "error"){
+            return res.status(404).json(budgetInfo)
+        }
+        const {totalDebit, userBudget, budgetStatus, balance} = budgetInfo
+        res.status(200).json({totalDebit:totalDebit,userBudget:userBudget,budgetStatus:budgetStatus,current_balance:balance})
+    }
+    catch(error){
         console.log(error);
-        res.status(500).json({"message":error.message})
+        return res.status(500).json({status:"error","message":error.message})
     }
 }
 
@@ -93,5 +129,7 @@ module.exports={
     addUser,
     deleteUserInfo,
     addBudget,
-    checkBudgetStatus
+    checkBudgetStatus,
+    getUsers,
+    getBudgetStatusInfo
 }

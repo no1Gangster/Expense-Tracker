@@ -1,7 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import expenseApi from "../ApiService/Expense";
+import { AuthContext, useAuth } from "../Context/AuthContext";
 
 function ExpenseForm({ newExpense }) {
+	//Context services
+	let authContext = useAuth();
+	let { id } = authContext;
+
 	const noteRef = useRef(null);
 	const amtRef = useRef(null);
 	const dateRef = useRef(null);
@@ -20,7 +25,7 @@ function ExpenseForm({ newExpense }) {
 	async function handleSubmit(e) {
 		e.preventDefault();
 		let obj = {
-			userId: import.meta.env.VITE_ROLL_NO,
+			userId: id,
 			note: noteRef.current.value,
 			amount: amtRef.current.value,
 			exp_date: dateRef.current.value,
@@ -31,7 +36,7 @@ function ExpenseForm({ newExpense }) {
 
 		res.status ? console.log("\nData Added") : console.log(res.status);
 
-		newExpense(obj);
+		newExpense();
 
 		noteRef.current.value = null;
 		amtRef.current.value = null;

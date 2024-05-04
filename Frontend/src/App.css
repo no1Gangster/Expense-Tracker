@@ -173,3 +173,7 @@ option {
 		scale: 1.2;
 	}
 }
+
+.recharts-layer {
+	cursor: pointer;
+}

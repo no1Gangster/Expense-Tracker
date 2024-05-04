@@ -1,7 +1,7 @@
 const express = require("express");
 const dbConnect = require("./db/db");
-const userRouter = require("./routes/user.route");
-const expenseRouter = require("./routes/expense.route");
+const userRouter = require("./route/user.route");
+const expenseRouter = require("./route/expense.route");
 
 require("dotenv").config();
 
@@ -29,4 +29,4 @@ app.get("/", (req, res) => {
 });
 
 dbConnect();
-app.listen(PORT, () => console.log("http://localhost:3000"));
+app.listen(PORT, () => console.log(`http://localhost:${PORT}`));

@@ -28,8 +28,8 @@ const renderCustomizedLabel = ({
 	return (
 		<>
 			<text
-				x={x}
-				y={y}
+				x={x + 15}
+				y={y - 2}
 				fill="white"
 				textAnchor={x > cx ? "start" : "end"}
 				dominantBaseline="central"
@@ -37,7 +37,7 @@ const renderCustomizedLabel = ({
 				{`${payload.name}`}
 			</text>
 			<text
-				x={x}
+				x={x + 20}
 				y={y + 20}
 				fill="white"
 				textAnchor={x > cx ? "start" : "end"}

@@ -5,7 +5,9 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import "./Sidebar.css";
 
-function Sidebar() {
+function Sidebar({ returnExpType }) {
+	const [expType, setExpType] = useState("all");
+
 	const [date, setDate] = useState([
 		{
 			startDate: new Date(),
@@ -13,6 +15,15 @@ function Sidebar() {
 			key: "selection",
 		},
 	]);
+
+	function showValue(e) {
+		setExpType(e.target.value);
+	}
+
+	function handleSubmit(e) {
+		e.preventDefault();
+		returnExpType(expType);
+	}
 
 	// useEffect(() => {
 	// 	console.log(
@@ -23,7 +34,10 @@ function Sidebar() {
 	// }, [date]);
 
 	return (
-		<div className="ms-3 pt-2" style={{height:"4svh", width:"2svw"}}>
+		<div
+			className="ms-3 pt-2"
+			style={{ height: "4svh", width: "2svw" }}
+		>
 			<a
 				className="btn btn-light"
 				data-bs-toggle="offcanvas"
@@ -40,7 +54,10 @@ function Sidebar() {
 				id="offcanvasExample"
 				aria-labelledby="offcanvasExampleLabel"
 			>
-				<div className="offcanvas-header" data-bs-theme="dark">
+				<div
+					className="offcanvas-header"
+					data-bs-theme="dark"
+				>
 					<h5
 						className="offcanvas-title"
 						id="offcanvasExampleLabel"
@@ -52,23 +69,36 @@ function Sidebar() {
 						className="btn-close"
 						data-bs-dismiss="offcanvas"
 						aria-label="Close"
-                        color=""
+						color=""
 					></button>
 				</div>
 				<div className="offcanvas-body">
 					<div>Select Expense Type:</div>
 					<br />
 					<div>
-						<form
-							action=""
-							className=""
-						>
+						<form onSubmit={handleSubmit}>
 							<div className="form-check">
 								<input
 									className="form-check-input"
 									type="radio"
-									name="flexRadioDefault"
+									name="ExpType"
+									checked={expType === "all"}
+									onChange={showValue}
+									value={"all"}
 									defaultChecked
+								/>
+								<label className="form-check-label color-light">
+									All
+								</label>
+							</div>
+							<div className="form-check">
+								<input
+									className="form-check-input"
+									type="radio"
+									checked={expType === "debit"}
+									onChange={showValue}
+									value={"debit"}
+									name="ExpType"
 								/>
 								<label className="form-check-label color-red">
 									Debit
@@ -78,7 +108,10 @@ function Sidebar() {
 								<input
 									className="form-check-input"
 									type="radio"
-									name="flexRadioDefault"
+									checked={expType === "credit"}
+									onChange={showValue}
+									value={"credit"}
+									name="ExpType"
 								/>
 								<label className="form-check-label color-green">
 									Credit
@@ -88,7 +121,10 @@ function Sidebar() {
 								<input
 									className="form-check-input"
 									type="radio"
-									name="flexRadioDefault"
+									checked={expType === "pending"}
+									onChange={showValue}
+									value={"pending"}
+									name="ExpType"
 								/>
 								<label className="form-check-label color-blue">
 									Pending
@@ -107,10 +143,12 @@ function Sidebar() {
 									ranges={date}
 									displayDateFormat="yyyy-MM-dd"
 									direction="vertical"
+									startDatePlaceholder=""
+									endDatePlaceholder=""
 								/>
 							</div>
-                            <br />
-                            <br />
+							<br />
+							<br />
 							<div className="input-group mb-3">
 								<input
 									type="text"
@@ -124,11 +162,19 @@ function Sidebar() {
 									type="button"
 									id="button-addon2"
 								>
-									<img src="/search-icon-white.png" alt="" width={"15svw"} />
+									<img
+										src="/search-icon-white.png"
+										alt=""
+										width={"15svw"}
+									/>
 								</button>
 							</div>
 							<div>
-								<input type="submit" className="btn btn-success" value="Apply Filters"/>
+								<input
+									type="submit"
+									className="btn btn-success"
+									value="Apply Filters"
+								/>
 							</div>
 						</form>
 					</div>
