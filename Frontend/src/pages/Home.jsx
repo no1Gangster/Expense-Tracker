@@ -20,8 +20,10 @@ function Home() {
 	//Fetches expenses list and sets it in expenses state variable
 	async function fetchData() {
 		try {
-			let res = await expenseApi.getExpenses(id);
-			setExpenses(res.data);
+			if(id && id.length == 24) {
+				let res = await expenseApi.getExpenses(id);
+				setExpenses(res.data);
+			}
 		} catch (error) {
 			console.log("Failed to fetch data at homepage\n" + error);
 		}
@@ -30,9 +32,10 @@ function Home() {
 
 	//Calculates Total Credit, Total Debit and Total Pending for the expenses in the expenses state variable
 	async function calculateOverview() {
-		let res = await expenseOverview(expenses);
-		setOverview(res);
-		console.log(res);
+		if(expenses) {
+			let res = await expenseOverview(expenses);
+			setOverview(res);
+		}
 	}
 
 	//Used to update state variable for refreshing dependent components

@@ -24,29 +24,48 @@ function Stats() {
 	//Fetches expenses list and sets it in expenses state variable
 	async function fetchData() {
 		try {
-			let res = await expenseApi.getExpenses(id);
-			setExpenses(res.data);
+			if(id && id.length == 24) {
+				let res = await expenseApi.getExpenses(id);
+				setExpenses(res.data);
+			}
 		} catch (error) {
 			console.log("Failed to fetch data at Stats Page\n" + error);
 		}
 	}
 
+	async function fetchTypeData() {
+		try {
+			if(id.length == 24) {
+				let res = await expenseApi.getTypeData(id, sidebarExpType);
+				setExpenses(res.data);
+			}
+		} catch (error) {
+			console.log("Failed to fetch Type data" + error);
+		}
+	}
+
 	//Calculates Total Credit, Total Debit and Total Pending for the expenses in the expenses state variable
 	async function calculateOverview() {
-		let res = expenseOverview(expenses);
-		setOverview(res);
+		if(expenses) {
+			let res = expenseOverview(expenses);
+			setOverview(res);
+		}
 	}
 
 	//Separates data into credit, debit, pending date wise which is used by LineGraph
 	async function expenseTypeData() {
-		let res = await expenseTypeWiseSplit(expenses);
-		setExpTypeData(res);
+		if(expenses){
+			let res = await expenseTypeWiseSplit(expenses);
+			setExpTypeData(res);
+		}
 	}
 
 	//Separates expenses into categories and corresponding net expenses, which is used by PieChart
 	async function expenseCategoryData() {
-		let res = await catgegoryWiseNet(expenses, sidebarExpType);
-		setExpCatData(res);
+		if(expenses) {
+			let res = await catgegoryWiseNet(expenses, sidebarExpType);
+			setExpCatData(res);
+		}
 	}
 
 	//Used to update state variable for refreshing dependent components
@@ -54,11 +73,22 @@ function Stats() {
 		setUpdate(update + 1);
 	}
 
+	function getExpenseType(expType) {
+		setSidebarExpType(expType);
+	}
+
 	//Expenses are fetched inititally on page load.
 	//Later if new data added or removed, the components are re-rendered with new data.
 	useEffect(() => {
-		fetchData();
-	}, [isLoggedIn, id, update,sidebarExpType]);
+		if (
+			sidebarExpType == "credit" ||
+			sidebarExpType == "debit" ||
+			sidebarExpType == "pending"
+		)
+			fetchTypeData();
+		else
+			fetchData();
+	}, [isLoggedIn, id, update, sidebarExpType]);
 
 	//After expenses are fetched, its corresponding overview is calculated
 	useEffect(() => {
@@ -69,7 +99,7 @@ function Stats() {
 
 	return (
 		<div className="container-fluid p-0 m-0 mx-auto">
-			<Sidebar />
+			<Sidebar returnExpType={getExpenseType} />
 			<div className="row mb-3 w-100 mt-4 mx-auto justify-content-between">
 				<div className="dark-box ms-3 ps-4 col">
 					{/* Displays overview data */}

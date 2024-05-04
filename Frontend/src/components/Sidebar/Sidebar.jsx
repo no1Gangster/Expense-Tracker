@@ -5,7 +5,9 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import "./Sidebar.css";
 
-function Sidebar() {
+function Sidebar({ returnExpType }) {
+	const [expType, setExpType] = useState("all");
+
 	const [date, setDate] = useState([
 		{
 			startDate: new Date(),
@@ -15,7 +17,12 @@ function Sidebar() {
 	]);
 
 	function showValue(e) {
-		console.log(e.target.value);
+		setExpType(e.target.value);
+	}
+
+	function handleSubmit(e) {
+		e.preventDefault();
+		returnExpType(expType);
 	}
 
 	// useEffect(() => {
@@ -69,15 +76,13 @@ function Sidebar() {
 					<div>Select Expense Type:</div>
 					<br />
 					<div>
-						<form
-							action=""
-							className=""
-						>
+						<form onSubmit={handleSubmit}>
 							<div className="form-check">
 								<input
 									className="form-check-input"
 									type="radio"
 									name="ExpType"
+									checked={expType === "all"}
 									onChange={showValue}
 									value={"all"}
 									defaultChecked
@@ -90,10 +95,10 @@ function Sidebar() {
 								<input
 									className="form-check-input"
 									type="radio"
+									checked={expType === "debit"}
 									onChange={showValue}
 									value={"debit"}
 									name="ExpType"
-									
 								/>
 								<label className="form-check-label color-red">
 									Debit
@@ -103,6 +108,7 @@ function Sidebar() {
 								<input
 									className="form-check-input"
 									type="radio"
+									checked={expType === "credit"}
 									onChange={showValue}
 									value={"credit"}
 									name="ExpType"
@@ -115,6 +121,7 @@ function Sidebar() {
 								<input
 									className="form-check-input"
 									type="radio"
+									checked={expType === "pending"}
 									onChange={showValue}
 									value={"pending"}
 									name="ExpType"
@@ -136,6 +143,8 @@ function Sidebar() {
 									ranges={date}
 									displayDateFormat="yyyy-MM-dd"
 									direction="vertical"
+									startDatePlaceholder=""
+									endDatePlaceholder=""
 								/>
 							</div>
 							<br />
