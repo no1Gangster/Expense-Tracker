@@ -1,10 +1,32 @@
 const mongoose = require("mongoose")
 const Expense = require("../model/expense.model")
+const User = require("../model/user.model")
+const { checkBudgetStatus } = require("./user.controller")
+const mail = require('../nodemailer/mail');
 
 //post an expense 
 async function addExpense(req,res){
     try{
         let expense = await Expense.create(req.body)
+        //user is adding a debit type expense
+        if(expense.exp_type.toLowerCase()=="debit"){
+            const user = await User.findById(expense.userId)
+            //user has set a budget - check debit limit status send mail
+            if(user && user.budget){
+               const budgetStatusResponse = await checkBudgetStatus(expense.userId);
+               if(budgetStatusResponse.status==="success"){
+                    const {userBudget,totalDebit,balance,budgetStatus} = budgetStatusResponse
+                    if(budgetStatus.includes("Exceeded") || budgetStatus.includes("reached 50%") || budgetStatus.includes("reached 90%")){
+                        await mail(user.email,userBudget,totalDebit,user.startDate,user.endDate,balance,budgetStatus)
+                        return res.status(200).json({expense,budgetStatus:budgetStatus,status:"mail_sent"})
+                    } else {
+                        return res.status(201).json({expense,budgetStatus:budgetStatus});
+                    }
+               }else {
+                    return res.status(404).json({ message: "User not found or budget not set" });
+               }            
+            }
+        }
         res.status(201).json(expense)
     }
     catch(error){
@@ -38,9 +60,9 @@ async function updateExpense(req,res){
         let updateData = req.body
         let expense = await Expense.findOneAndUpdate({userId:userId,_id:expenseId},updateData,{new:true})
         if(!expense){
-            res.status(404).json({"message":"Expense not found"})
+            return res.status(404).json({"message":"Expense not found"})
         }
-        res.status(200).json(expense)
+        res.status(200).json({expense,"message":"Expense updated successfully"})
 
     }
     catch(error){
@@ -148,11 +170,9 @@ async function getExpenseSummaryLastSevenDays(req,res){
 async function getOverview(req,res){
     try {
         const {userId}=req.params
-        const user=await User.findById(userId)
-        let balance=user.balance
         const expenses=await Expense.find({userId})
         if(expenses){
-            let totalDebit=0,totalCredit=0,totalPending=0;
+            let balance=0,totalDebit=0,totalCredit=0,totalPending=0;
             expenses.forEach(expense=>{
                 if(expense.exp_type.toLowerCase()=="credit"){
                     totalCredit+=expense.amount
@@ -165,8 +185,6 @@ async function getOverview(req,res){
                 }
             })
             balance=totalCredit+totalPending-totalDebit;
-            user.balance=balance
-            await user.save();
             res.status(200).json({totalCredit,totalDebit,totalPending,balance})
         }
         else{
@@ -179,6 +197,7 @@ async function getOverview(req,res){
     }
 }
 
+//Filters
 async function filterExpenseByDate(req,res){
     try {
         let userId=req.params.userId
@@ -196,8 +215,8 @@ async function filterExpenseByDate(req,res){
             userId,
             $expr: {
                 $and: [
-                    { $gte: [{ $toDate: "$date" }, startDate] },
-                    { $lte: [{ $toDate: "$date" }, endDate] }
+                    { $gte: [{ $toDate: "$exp_date" }, startDate] },
+                    { $lte: [{ $toDate: "$exp_date" }, endDate] }
                 ]
             }
         });
@@ -304,12 +323,11 @@ async function filterExpenseByCategory(req,res){
         else{
             res.status(404).json({"message":`No transactions found for ${category}`})
         }
-    } catch (error) {
+    }catch (error) {
         console.log(error)
         res.status(400).json({"message":error.message})
     }
 }
-
 
 module.exports={
     addExpense,
@@ -320,9 +338,9 @@ module.exports={
     getExpenseSummaryLastSevenDays,
     getExpenseSortedByExpenseDate,
     getOverview,
-    filterExpenseByCategory,
     filterExpenseByDate,
     filterExpenseByMonth,
     filterExpenseByYear,
-    filterExpenseByType
+    filterExpenseByType,
+    filterExpenseByCategory
 }
