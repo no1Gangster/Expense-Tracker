@@ -16,11 +16,11 @@ async function addExpense(req,res){
                const budgetStatusResponse = await checkBudgetStatus(expense.userId);
                if(budgetStatusResponse.status==="success"){
                     const {userBudget,totalDebit,balance,budgetStatus} = budgetStatusResponse
-                    if(budgetStatus.includes("Exceeded")){
-                        await mail(user.email,userBudget,totalDebit,user.startDate,user.endDate,balance)
-                        return res.status(200).json({expense,status:"mail_sent"})
+                    if(budgetStatus.includes("Exceeded") || budgetStatus.includes("reached 50%") || budgetStatus.includes("reached 90%")){
+                        await mail(user.email,userBudget,totalDebit,user.startDate,user.endDate,balance,budgetStatus)
+                        return res.status(200).json({expense,budgetStatus:budgetStatus,status:"mail_sent"})
                     } else {
-                        return res.status(500).json({ message: "Error occurred while checking budget status" });
+                        return res.status(201).json({expense,budgetStatus:budgetStatus});
                     }
                }else {
                     return res.status(404).json({ message: "User not found or budget not set" });
@@ -60,9 +60,9 @@ async function updateExpense(req,res){
         let updateData = req.body
         let expense = await Expense.findOneAndUpdate({userId:userId,_id:expenseId},updateData,{new:true})
         if(!expense){
-            res.status(404).json({"message":"Expense not found"})
+            return res.status(404).json({"message":"Expense not found"})
         }
-        res.status(200).json(expense)
+        res.status(200).json({expense,"message":"Expense updated successfully"})
 
     }
     catch(error){

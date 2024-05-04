@@ -89,7 +89,16 @@ async function checkBudgetStatus(userId){
             }
         })
         const balance = Math.abs(totalCredit - totalDebit + totalPending)
-        const budgetStatus = userBudget >= totalDebit? `Within budget limit set between ${startDate} and ${endDate}`:`Exceeded budget limit set between ${startDate} and ${endDate}. Over budget by Rs.${totalDebit-userBudget}`
+        const budgetExhausted = totalDebit/userBudget
+        let budgetStatus=""
+
+        if(budgetExhausted>=0.5 && budgetExhausted<0.9){
+            budgetStatus = `You have reached 50% of your budget limit set between ${startDate} and ${endDate}.You are Rs.${userBudget-totalDebit} away from over spending`
+        }else if(budgetExhausted>=0.9 && budgetExhausted<1){
+            budgetStatus = `You have reached 90% of your budget limit set between ${startDate} and ${endDate}.You are Rs.${userBudget-totalDebit} away from over spending`
+        }else{
+            budgetStatus = userBudget >= totalDebit? `Within budget limit set between ${startDate} and ${endDate}`:`Exceeded budget limit set between ${startDate} and ${endDate}. Over budget by Rs.${totalDebit-userBudget}` 
+        }
         console.log(user.email);
         
         return {userBudget:userBudget,totalDebit:totalDebit,balance:balance,budgetStatus:budgetStatus,status:"success"}
