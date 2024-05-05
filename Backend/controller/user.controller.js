@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 const User = require("../model/user.model");
 const Expense = require("../model/expense.model");
+=======
+const mongoose = require('mongoose')
+const User = require("../model/user.model");
+const Expense = require("../model/expense.model");
+// const { getOverview } = require('./expense.controller');
+>>>>>>> 4a578f0361ef2ecbe7bce6acb6a1d81188a3095c
 
 //Post a user detail
 async function addUser(req,res){
@@ -13,6 +20,7 @@ async function addUser(req,res){
     }
 }
 
+<<<<<<< HEAD
 //get all users
 async function getUsers(req,res){
     try{
@@ -24,6 +32,8 @@ async function getUsers(req,res){
     }
 }
 
+=======
+>>>>>>> 4a578f0361ef2ecbe7bce6acb6a1d81188a3095c
 //Delete a user account
 async function deleteUserInfo(req,res){
     try{
@@ -64,11 +74,20 @@ async function addBudget(req,res){
 }
 
 //Budget tracking
+<<<<<<< HEAD
 async function checkBudgetStatus(userId){
     try{
         const user = await User.findById(userId)
         if(!user || !user.budget){
             return { status: "error", message: "User not found or budget not set" };
+=======
+async function checkBudgetStatus(req,res){
+    try{
+        const {userId} = req.params
+        const user = await User.findById(userId)
+        if(!user){
+            return res.status(404).json({"message":"User not found"})
+>>>>>>> 4a578f0361ef2ecbe7bce6acb6a1d81188a3095c
         }
         const userBudget = user.budget
         const startDate = user.startDate
@@ -89,6 +108,7 @@ async function checkBudgetStatus(userId){
             }
         })
         const balance = Math.abs(totalCredit - totalDebit + totalPending)
+<<<<<<< HEAD
         const budgetExhausted = totalDebit/userBudget
         let budgetStatus=""
 
@@ -122,6 +142,13 @@ async function getBudgetStatusInfo(req,res){
     catch(error){
         console.log(error);
         return res.status(500).json({status:"error","message":error.message})
+=======
+        const budgetStatus = userBudget >= totalDebit? `Within budget limit set between ${startDate} and ${endDate}`:`Exceeded budget limit set between ${startDate} and ${endDate}. Over budget by Rs.${totalDebit-userBudget}`
+        res.status(200).json({userBudget:userBudget,totalDebit:totalDebit,balance:balance,budgetStatus:budgetStatus})
+    }catch(error){
+        console.log(error);
+        res.status(500).json({"message":error.message})
+>>>>>>> 4a578f0361ef2ecbe7bce6acb6a1d81188a3095c
     }
 }
 
@@ -129,7 +156,11 @@ module.exports={
     addUser,
     deleteUserInfo,
     addBudget,
+<<<<<<< HEAD
     checkBudgetStatus,
     getUsers,
     getBudgetStatusInfo
+=======
+    checkBudgetStatus
+>>>>>>> 4a578f0361ef2ecbe7bce6acb6a1d81188a3095c
 }
