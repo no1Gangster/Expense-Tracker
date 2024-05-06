@@ -1,3 +1,5 @@
+
+//Finds net expense for each category
 export default async function catgegoryWiseNet(data, exp_type) {
 	let categoryExp = {
 		personal: 0,
@@ -9,12 +11,17 @@ export default async function catgegoryWiseNet(data, exp_type) {
 
 	if (exp_type == "credit" || exp_type == "debit" || exp_type == "pending") {
 		data.forEach((expense) => {
-			if (expense.exp_category == "personal") categoryExp.personal += expense.amount
-			if (expense.exp_category == "food") categoryExp.food += expense.amount
-			if (expense.exp_category == "utility") categoryExp.utility += expense.amount
-			if (expense.exp_category == "medical") categoryExp.medical += expense.amount
-			if (expense.exp_category == "other") categoryExp.other += expense.amount
-		})
+			if (expense.exp_category == "personal")
+				categoryExp.personal += expense.amount;
+			if (expense.exp_category == "food")
+				categoryExp.food += expense.amount;
+			if (expense.exp_category == "utility")
+				categoryExp.utility += expense.amount;
+			if (expense.exp_category == "medical")
+				categoryExp.medical += expense.amount;
+			if (expense.exp_category == "other")
+				categoryExp.other += expense.amount;
+		});
 	} else {
 		data.forEach((expense) => {
 			if (expense.exp_category == "personal") {
@@ -48,6 +55,7 @@ export default async function catgegoryWiseNet(data, exp_type) {
 	return await format(categoryExp);
 }
 
+//Formats data into PieChart component usable form
 function format(dataObj) {
 	let newData = [
 		{
@@ -77,6 +85,7 @@ function format(dataObj) {
 	return newData;
 }
 
+//Filters out total of each expense type for each date
 export function expenseTypeWiseSplit(data) {
 	let newData = data.map((item) => ({
 		date: item.exp_date,
@@ -89,11 +98,11 @@ export function expenseTypeWiseSplit(data) {
 		for (let j = 0; j < newData.length; j++) {
 			if (data[i].exp_date === newData[j].date) {
 				if (data[i].exp_type === "debit") {
-					newData[j].debit = data[i].amount;
+					newData[j].debit += data[i].amount;
 				} else if (data[i].exp_type === "credit") {
-					newData[j].credit = data[i].amount;
+					newData[j].credit += data[i].amount;
 				} else if (data[i].exp_type === "pending") {
-					newData[j].pending = data[i].amount;
+					newData[j].pending += data[i].amount;
 				}
 			}
 		}

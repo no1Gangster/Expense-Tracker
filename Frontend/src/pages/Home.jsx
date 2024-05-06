@@ -12,15 +12,14 @@ function Home() {
 	let authContext = useAuth();
 	let { isLoggedIn, id } = authContext;
 
-	const [expenses, setExpenses] = useState([]);
-	const [overview, setOverview] = useState([]);
-	const [update, setUpdate] = useState(0);
-
+	const [expenses, setExpenses] = useState([]);		//Stores expenses to display
+	const [overview, setOverview] = useState([]);		//Sets net overview data
+	const [update, setUpdate] = useState(0);			//Use to refresh components on different actions
 
 	//Fetches expenses list and sets it in expenses state variable
 	async function fetchData() {
 		try {
-			if(id && id.length == 24) {
+			if (id && id.length == 24) {
 				let res = await expenseApi.getExpenses(id);
 				setExpenses(res.data);
 			}
@@ -29,10 +28,9 @@ function Home() {
 		}
 	}
 
-
 	//Calculates Total Credit, Total Debit and Total Pending for the expenses in the expenses state variable
 	async function calculateOverview() {
-		if(expenses) {
+		if (expenses) {
 			let res = await expenseOverview(expenses);
 			setOverview(res);
 		}
@@ -42,13 +40,12 @@ function Home() {
 	function refreshExpenseHistory() {
 		setUpdate(update + 1);
 	}
-	
+
 	//Expenses are fetched inititally on page load.
 	//Later if new data added or removed, the components are re-rendered with new data.
 	useEffect(() => {
 		fetchData();
 	}, [isLoggedIn, id, update]);
-	
 
 	//After expenses are fetched, its corresponding overview is calculated
 	useEffect(() => {
