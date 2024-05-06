@@ -246,8 +246,8 @@ async function filterExpenseByMonth(req,res){
             userId,
             $expr: {
                 $and: [
-                    { $gte: [{ $toDate: "$date" }, startDate] },
-                    { $lte: [{ $toDate: "$date" }, endDate] }
+                    { $gte: [{ $toDate: "$exp_date" }, startDate] },
+                    { $lte: [{ $toDate: "$exp_date" }, endDate] }
                 ]
             }
         });
@@ -277,8 +277,8 @@ async function filterExpenseByYear(req,res){
             userId,
             $expr: {
                 $and: [
-                    { $gte: [{ $toDate: "$date" }, startDate] },
-                    { $lte: [{ $toDate: "$date" }, endDate] }
+                    { $gte: [{ $toDate: "$exp_date" }, startDate] },
+                    { $lte: [{ $toDate: "$exp_date" }, endDate] }
                 ]
             }
         });

@@ -16,7 +16,7 @@ export const AuthProvider = (props) => {
 	}, []);
 
 	const login = () => {
-		let cId = String(import.meta.env.VITE_ROLL_NO)
+		let cId = String(import.meta.env.VITE_ROLL_NO);
 		localStorage.setItem("id", cId);
 		setIsLoggedIn(true);
 		setId(cId);
@@ -28,9 +28,7 @@ export const AuthProvider = (props) => {
 	};
 
 	return (
-		<AuthContext.Provider
-			value={{ id, isLoggedIn, login, logout }}
-		>
+		<AuthContext.Provider value={{ id, isLoggedIn, login, logout }}>
 			{props.children}
 		</AuthContext.Provider>
 	);

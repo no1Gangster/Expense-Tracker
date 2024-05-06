@@ -3,15 +3,11 @@ const{
     addExpense,
     getExpenseByUserId,
     updateExpense,
-    deleteExpense,getExpenseSortedByAmount,
+    deleteExpense,
+    getExpenseSortedByAmount,
     getExpenseSummaryLastSevenDays,
     getExpenseSortedByExpenseDate,
-    getOverview,
-    filterExpenseByDate,
-    filterExpenseByMonth,
-    filterExpenseByYear,
-    filterExpenseByType,
-    filterExpenseByCategory
+    getOverview
 }=require("../controller/expense.controller")
 
 const expenseRouter = express.Router()

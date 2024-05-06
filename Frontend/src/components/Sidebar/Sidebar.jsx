@@ -1,17 +1,21 @@
 import { addDays, format } from "date-fns";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import "./Sidebar.css";
 
-function Sidebar({ returnExpType }) {
+function Sidebar({ filters }) {
 	const [expType, setExpType] = useState("all");
+	const [duration, setDuration] = useState("all");
+
+	const searchRef = useRef(null);
 
 	const [date, setDate] = useState([
+		//Initializes start date and end date in the sidebar
 		{
-			startDate: new Date(),
-			endDate: addDays(new Date(), 7),
+			startDate: addDays(new Date(), -7),
+			endDate: new Date(),
 			key: "selection",
 		},
 	]);
@@ -20,18 +24,27 @@ function Sidebar({ returnExpType }) {
 		setExpType(e.target.value);
 	}
 
-	function handleSubmit(e) {
-		e.preventDefault();
-		returnExpType(expType);
+	function changeDuration(e) {
+		setDuration(e.target.value);
 	}
 
-	// useEffect(() => {
-	// 	console.log(
-	// 		format(date[0].startDate, "yyyy-MM-dd") +
-	// 			"\n" +
-	// 			format(date[0].endDate, "yyyy-MM-dd")
-	// 	);
-	// }, [date]);
+	function handleSubmit(e) {
+		e.preventDefault();
+
+		let dateRange = [
+			format(date[0].startDate, "yyyy-MM-dd"),
+			format(date[0].endDate, "yyyy-MM-dd"),
+		];
+
+		if (duration == "custom")
+			filters({
+				//Returns data object for custom date filter
+				expType: expType,
+				duration: { duration, dateRange },
+				search: searchRef.current.value,
+			});
+		else filters({ expType, duration, search: searchRef.current.value }); //Returns data object for remaining data filters
+	}
 
 	return (
 		<div
@@ -73,10 +86,10 @@ function Sidebar({ returnExpType }) {
 					></button>
 				</div>
 				<div className="offcanvas-body">
-					<div>Select Expense Type:</div>
-					<br />
 					<div>
 						<form onSubmit={handleSubmit}>
+							<div>Select Expense Type:</div>
+							<br />
 							<div className="form-check">
 								<input
 									className="form-check-input"
@@ -85,7 +98,6 @@ function Sidebar({ returnExpType }) {
 									checked={expType === "all"}
 									onChange={showValue}
 									value={"all"}
-									defaultChecked
 								/>
 								<label className="form-check-label color-light">
 									All
@@ -132,20 +144,74 @@ function Sidebar({ returnExpType }) {
 							</div>
 							<br />
 							<br />
-							<p>Select Date Range:</p>
-							<div>
-								<DateRange
-									editableDateInputs={true}
-									onChange={(item) => {
-										setDate([item.selection]);
-									}}
-									moveRangeOnFirstSelection={false}
-									ranges={date}
-									displayDateFormat="yyyy-MM-dd"
-									direction="vertical"
-									startDatePlaceholder=""
-									endDatePlaceholder=""
+							<p>Select Duration:</p>
+							<div className="form-check">
+								<input
+									className="form-check-input"
+									type="radio"
+									name="ExpDuration"
+									checked={duration === "seven"}
+									onChange={changeDuration}
+									value={"seven"}
 								/>
+								<label className="form-check-label color-light">
+									Last Seven Days
+								</label>
+							</div>
+							<div className="form-check">
+								<input
+									className="form-check-input"
+									type="radio"
+									checked={duration === "month"}
+									onChange={changeDuration}
+									value={"month"}
+									name="ExpDuration"
+								/>
+								<label className="form-check-label color-red">
+									Last Month
+								</label>
+							</div>
+							<div className="form-check">
+								<input
+									className="form-check-input"
+									type="radio"
+									checked={duration === "year"}
+									onChange={changeDuration}
+									value={"year"}
+									name="ExpDuration"
+								/>
+								<label className="form-check-label color-green">
+									Last Year
+								</label>
+							</div>
+							<div className="form-check">
+								<input
+									className="form-check-input"
+									type="radio"
+									checked={duration === "custom"}
+									onChange={changeDuration}
+									value={"custom"}
+									name="ExpDuration"
+								/>
+								<label className="form-check-label color-blue">
+									Custom Date Range
+								</label>
+							</div>
+							<div>
+								{duration === "custom" && (
+									<DateRange
+										editableDateInputs={true}
+										onChange={(item) => {
+											setDate([item.selection]);
+										}}
+										moveRangeOnFirstSelection={false}
+										ranges={date}
+										displayDateFormat="yyyy-MM-dd"
+										direction="vertical"
+										startDatePlaceholder=""
+										endDatePlaceholder=""
+									/>
+								)}
 							</div>
 							<br />
 							<br />
@@ -153,6 +219,7 @@ function Sidebar({ returnExpType }) {
 								<input
 									type="text"
 									className="form-control dark-input bg-dark"
+									ref={searchRef}
 									placeholder="Description"
 									aria-label="Recipient's username"
 									aria-describedby="button-addon2"
@@ -171,9 +238,19 @@ function Sidebar({ returnExpType }) {
 							</div>
 							<div>
 								<input
+									type="reset"
+									value="Clear"
+									className="btn btn-danger me-2"
+									onClick={() => {
+										setDuration("all");
+										setExpType("all");
+									}}
+								/>
+								<input
 									type="submit"
 									className="btn btn-success"
 									value="Apply Filters"
+									data-bs-dismiss="offcanvas"
 								/>
 							</div>
 						</form>
