@@ -1,5 +1,6 @@
 const User = require("../model/user.model");
 const Expense = require("../model/expense.model");
+const bcrypt=require('bcrypt')
 
 //Post a user detail
 async function addUser(req,res){
@@ -98,9 +99,7 @@ async function checkBudgetStatus(userId){
             budgetStatus = `You have reached 90% of your budget limit set between ${startDate} and ${endDate}.You are Rs.${userBudget-totalDebit} away from over spending`
         }else{
             budgetStatus = userBudget >= totalDebit? `Within budget limit set between ${startDate} and ${endDate}`:`Exceeded budget limit set between ${startDate} and ${endDate}. Over budget by Rs.${totalDebit-userBudget}` 
-        }
-        console.log(user.email);
-        
+        }      
         return {userBudget:userBudget,totalDebit:totalDebit,balance:balance,budgetStatus:budgetStatus,status:"success"}
     }catch(error){  
         console.log(error); 
