@@ -7,6 +7,7 @@ export const AuthContext = createContext(null);
 export const AuthProvider = (props) => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [id, setId] = useState(null);
+	const [ email, setEmail ] = useState(null);
 
 	useEffect(() => {
 		const jwttoken = localStorage.getItem("id");
@@ -15,10 +16,11 @@ export const AuthProvider = (props) => {
 		}
 	}, []);
 
-	const login = () => {
-		let cId = String(import.meta.env.VITE_ROLL_NO);
-		localStorage.setItem("id", cId);
+	const login = (email) => {
+		let cId = email;
+		localStorage.setItem("email", cId);
 		setIsLoggedIn(true);
+		setEmail(email);
 		setId(cId);
 	};
 
