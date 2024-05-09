@@ -1,6 +1,7 @@
 const User = require("../model/user.model");
 const Expense = require("../model/expense.model");
 const bcrypt=require('bcrypt')
+const jwt=require('jsonwebtoken')
 
 //Post a user detail
 async function addUser(req,res){
@@ -46,7 +47,8 @@ const loginUser=async(req,res)=>{
             const token=jwt.sign({user:{userId:userdetails._id,name:userdetails.name,email:userdetails.email,mobile:userdetails.mobile}},
                 process.env.JWT_SECRET
             )
-            res.status(200).json({"message":"Login Successful"},token)
+            console.log(token)
+            res.status(200).json({"message":"Login Successful",token})
         }
         else{
             res.status(400).json({"message":"Invalid Password"})

@@ -3,12 +3,14 @@ const{
     addUser,deleteUserInfo,
     addBudget,
     getUsers,
-    getBudgetStatusInfo
+    getBudgetStatusInfo,
+    loginUser
 } = require("../controller/user.controller")
 
 const userRouter = express.Router()
 
-userRouter.post("/",addUser)
+userRouter.post("/signup",addUser)
+userRouter.post("/signin",loginUser)
 userRouter.get("/",getUsers)
 userRouter.delete("/:userId",deleteUserInfo)
 userRouter.put("/:userId/budget",addBudget)
