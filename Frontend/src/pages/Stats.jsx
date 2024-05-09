@@ -8,6 +8,7 @@ import expenseApi from "../ApiService/Expense";
 import expenseOverview from "../workers/expenseOverview";
 import catgegoryWiseNet, { expenseTypeWiseSplit } from "../workers/expenseSort";
 import { useAuth } from "../Context/AuthContext";
+<<<<<<< HEAD
 
 function Stats() {
 	const authContext = useAuth();
@@ -20,11 +21,32 @@ function Stats() {
 	const [expCatData, setExpCatData] = useState([]);
 
 	const [sidebarExpType, setSidebarExpType] = useState("all");
+=======
+import filterExpenses from "../workers/expenseFilter";
+
+function Stats() {
+	//Context variables
+	const authContext = useAuth();
+	let { isLoggedIn, id } = authContext;
+
+	const [expenses, setExpenses] = useState([]); 					//Expense Data
+	const [update, setUpdate] = useState(0); 						//Use to refresh components on different actions
+	const [overview, setOverview] = useState([]);					//Sets net overview data
+
+	const [expTypeData, setExpTypeData] = useState([]); 			//Used to store data for LineGraph component
+	const [expCatData, setExpCatData] = useState([]); 				//Used to store data for PieChart component
+
+	const [sidebarExpType, setSidebarExpType] = useState("all"); 	//Used to set expenses if only expense type is selected in sidebar component
+>>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
 
 	//Fetches expenses list and sets it in expenses state variable
 	async function fetchData() {
 		try {
+<<<<<<< HEAD
 			if(id && id.length == 24) {
+=======
+			if (id && id.length == 24) {
+>>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
 				let res = await expenseApi.getExpenses(id);
 				setExpenses(res.data);
 			}
@@ -33,9 +55,16 @@ function Stats() {
 		}
 	}
 
+<<<<<<< HEAD
 	async function fetchTypeData() {
 		try {
 			if(id.length == 24) {
+=======
+	//If only expense type is selected as filter in sidebar then this function is used to get filtered data
+	async function fetchTypeData() {
+		try {
+			if (id.length == 24) {
+>>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
 				let res = await expenseApi.getTypeData(id, sidebarExpType);
 				setExpenses(res.data);
 			}
@@ -46,7 +75,11 @@ function Stats() {
 
 	//Calculates Total Credit, Total Debit and Total Pending for the expenses in the expenses state variable
 	async function calculateOverview() {
+<<<<<<< HEAD
 		if(expenses) {
+=======
+		if (expenses) {
+>>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
 			let res = expenseOverview(expenses);
 			setOverview(res);
 		}
@@ -54,7 +87,11 @@ function Stats() {
 
 	//Separates data into credit, debit, pending date wise which is used by LineGraph
 	async function expenseTypeData() {
+<<<<<<< HEAD
 		if(expenses){
+=======
+		if (expenses) {
+>>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
 			let res = await expenseTypeWiseSplit(expenses);
 			setExpTypeData(res);
 		}
@@ -62,7 +99,11 @@ function Stats() {
 
 	//Separates expenses into categories and corresponding net expenses, which is used by PieChart
 	async function expenseCategoryData() {
+<<<<<<< HEAD
 		if(expenses) {
+=======
+		if (expenses) {
+>>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
 			let res = await catgegoryWiseNet(expenses, sidebarExpType);
 			setExpCatData(res);
 		}
@@ -73,8 +114,23 @@ function Stats() {
 		setUpdate(update + 1);
 	}
 
+<<<<<<< HEAD
 	function getExpenseType(expType) {
 		setSidebarExpType(expType);
+=======
+	//Gets filter from Sidebar compenent, redirects the filters to expenseFilter worker to get filtered data.
+	async function getFilters(filters) {
+		if (!filters || !filters.duration || filters.duration == "all") {
+			console.log(filters);
+			setSidebarExpType(filters.expType);
+			refreshExpenseHistory();
+		}
+
+		if (filters && filters.duration != "all") {
+			let filteredData = await filterExpenses(filters, id);
+			setExpenses(filteredData);
+		}
+>>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
 	}
 
 	//Expenses are fetched inititally on page load.
@@ -86,8 +142,12 @@ function Stats() {
 			sidebarExpType == "pending"
 		)
 			fetchTypeData();
+<<<<<<< HEAD
 		else
 			fetchData();
+=======
+		else fetchData();
+>>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
 	}, [isLoggedIn, id, update, sidebarExpType]);
 
 	//After expenses are fetched, its corresponding overview is calculated
@@ -99,7 +159,11 @@ function Stats() {
 
 	return (
 		<div className="container-fluid p-0 m-0 mx-auto">
+<<<<<<< HEAD
 			<Sidebar returnExpType={getExpenseType} />
+=======
+			<Sidebar filters={getFilters} />
+>>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
 			<div className="row mb-3 w-100 mt-4 mx-auto justify-content-between">
 				<div className="dark-box ms-3 ps-4 col">
 					{/* Displays overview data */}

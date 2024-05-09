@@ -17,8 +17,13 @@ function ExpenseForm({ newExpense }) {
 		let todays_date = await String(new Date().toJSON().slice(0, 10));
 		dateRef.current.value = todays_date;
 	}
+<<<<<<< HEAD
 	
 	useEffect(()=> {
+=======
+
+	useEffect(() => {
+>>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
 		setDate();
 	}, []);
 

@@ -14,7 +14,10 @@ const userSchema = new mongoose.Schema({
         required:true,
         unique:true
     },
-    //Password field to be added + auth
+    password:{
+        type:String,
+        required:true
+    },
     budget:{
         type:Number,
         default:0

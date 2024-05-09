@@ -14,7 +14,6 @@ OAuth2_client.setCredentials({ refresh_token: refToken });
 async function sendMail(userEmail, userBudget, totalDebit, startDate, endDate, balance, budgetStatus) {
   try {
     const accessToken = await OAuth2_client.getAccessToken();
-
     const transport = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -28,7 +27,6 @@ async function sendMail(userEmail, userBudget, totalDebit, startDate, endDate, b
     });
 
     const {subject, text} = composeEmailContent(userBudget, totalDebit, startDate, endDate, balance, budgetStatus);
-
     const mailOptions = {
       from: "EXPENSE_TRACKER_APP💸<adyashap800@gmail.com>",
       to: userEmail,
