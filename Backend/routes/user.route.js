@@ -6,7 +6,8 @@ const{
 
 const userRouter = express.Router()
 
-userRouter.post("/",addUser)
+userRouter.post("/signup",addUser)
+userRouter.post("/signin",loginUser)
 userRouter.delete("/:userId",deleteUserInfo)
 userRouter.put("/:userId/budget",addBudget)
 userRouter.get("/:userId/budgetStatus",checkBudgetStatus)
