@@ -57,28 +57,44 @@ function Navbar() {
 							<ul className="navbar-nav justify-content-center flex-grow-1 d-flex pe-5 ">
 								<li className="nav-item navbar-items me-2">
 									<Link
-										className="nav-link"
+										className="clear-link"
 										aria-current="page"
 										to="/"
-									>
-										Home
+										>
+										<p
+											data-bs-dismiss="offcanvas"
+											className="nav-link"
+											>
+											Home
+										</p>
 									</Link>
 								</li>
 								<li className="nav-item navbar-items me-2">
-									<Link
-										className="nav-link "
+								<Link
+										className="clear-link"
 										aria-current="page"
 										to="/stats"
-									>
-										Stats
+										>
+										<p
+											data-bs-dismiss="offcanvas"
+											className="nav-link"
+											>
+											Stats
+										</p>
 									</Link>
 								</li>
 								<li className="nav-item navbar-items">
-									<Link
-										className="nav-link"
+								<Link
+										className="clear-link"
+										aria-current="page"
 										to="/about"
 									>
-										About Us
+										<p
+											data-bs-dismiss="offcanvas"
+											className="nav-link"
+											>
+											About
+										</p>
 									</Link>
 								</li>
 							</ul>
