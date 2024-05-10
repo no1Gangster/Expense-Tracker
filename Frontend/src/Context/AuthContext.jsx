@@ -6,31 +6,36 @@ export const AuthContext = createContext(null);
 
 export const AuthProvider = (props) => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [token, setToken] = useState(null);
 	const [id, setId] = useState(null);
-	const [ email, setEmail ] = useState(null);
 
 	useEffect(() => {
-		const jwttoken = localStorage.getItem("id");
-		if (jwttoken) {
-			login(true);
+		const jtoken = localStorage.getItem("token");
+		const jid = localStorage.getItem("id");
+		if (jtoken) {
+			login(jtoken, jid);
 		}
 	}, []);
 
-	const login = (email) => {
-		let cId = email;
-		localStorage.setItem("email", cId);
+	const login = (token, id) => {
+		console.log(token);
 		setIsLoggedIn(true);
-		setEmail(email);
-		setId(cId);
+		setToken(token);
+		setId(id);
+		localStorage.setItem("token", token);
+		localStorage.setItem("id", id);
 	};
 
 	const logout = () => {
+		localStorage.removeItem("token");
 		localStorage.removeItem("id");
 		setIsLoggedIn(false);
+		setToken(null);
+		setId(null);
 	};
 
 	return (
-		<AuthContext.Provider value={{ id, isLoggedIn, login, logout }}>
+		<AuthContext.Provider value={{ token, id, isLoggedIn, login, logout }}>
 			{props.children}
 		</AuthContext.Provider>
 	);

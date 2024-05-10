@@ -48,7 +48,7 @@ const loginUser=async(req,res)=>{
                 process.env.JWT_SECRET
             )
             console.log(token)
-            res.status(200).json({"message":"Login Successful",token})
+            res.status(200).json({"message":"Login Successful",userdetails,token})
         }
         else{
             res.status(400).json({"message":"Invalid Password"})

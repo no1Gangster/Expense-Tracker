@@ -10,11 +10,13 @@ import { useAuth } from "../Context/AuthContext";
 
 function Home() {
 	let authContext = useAuth();
-	let { isLoggedIn, id } = authContext;
+	let { isLoggedIn, token, id } = authContext;
 
-	const [expenses, setExpenses] = useState([]);		//Stores expenses to display
-	const [overview, setOverview] = useState([]);		//Sets net overview data
-	const [update, setUpdate] = useState(0);			//Use to refresh components on different actions
+	const [expenses, setExpenses] = useState([]); //Stores expenses to display
+	const [overview, setOverview] = useState([]); //Sets net overview data
+	const [update, setUpdate] = useState(0); //Use to refresh components on different actions
+
+	console.log(token);
 
 	//Fetches expenses list and sets it in expenses state variable
 	async function fetchData() {

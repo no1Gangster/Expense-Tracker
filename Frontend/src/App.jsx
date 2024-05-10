@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Stats from "./pages/Stats";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
+import ProtectedRoute from "./layout/ProtectedRoute";
 
 function App() {
 	const router = createBrowserRouter([
@@ -14,13 +15,20 @@ function App() {
 			path: "/",
 			element: <Layout />,
 			children: [
-				{ path: "", element: <Home /> },
-				{ path: "/stats", element: <Stats /> },
+				{
+					path: "/",
+					element: <ProtectedRoute />,
+					children: [
+						{ path: "/", element: <Home /> },
+						{ path: "/stats", element: <Stats /> },
+					],
+				},
 				{ path: "/signin", element: <Signin /> },
 				{ path: "/signup", element: <Signup /> },
 			],
 		},
 	]);
+
 	return (
 		<>
 			<RouterProvider router={router} />

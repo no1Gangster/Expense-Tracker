@@ -25,9 +25,9 @@ function Signup() {
 	async function createAccount() {
 		let user = {
 			name: nameRef.current.value,
-			mobile: mobRef.current.value,
 			email: mailRef.current.value,
-			passsword: passRef.current.value,
+			mobile: mobRef.current.value,
+			password: passRef.current.value,
 		};
 
 		try {
