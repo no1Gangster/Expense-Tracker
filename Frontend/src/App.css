@@ -11,6 +11,10 @@
 }
 .nav-link {
 	color: var(--neon-green) !important;
+	margin: 0 !important;
+}
+.clear-link {
+	text-decoration: none;
 }
 .navbar-items :hover {
 	border-bottom: 1px solid var(--neon-red);
@@ -56,6 +60,7 @@
 }
 
 .expense-list::-webkit-scrollbar-track {
+	display: none;
 	background: grey;
 	width: 0.5rem;
 	border-radius: 100vw;

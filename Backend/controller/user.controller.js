@@ -1,14 +1,60 @@
 const User = require("../model/user.model");
 const Expense = require("../model/expense.model");
+const bcrypt=require('bcrypt')
+const jwt=require('jsonwebtoken')
 
 //Post a user detail
 async function addUser(req,res){
     try{
-        let user = await User.create(req.body)
+        let {name,email,mobile,password,budget,startDate,endDate}=req.body
+        let extEmail=await User.findOne({email:email})
+        if(extEmail){
+            return res.status(400).json({"message":"Email is already in use"})
+        }
+        let extMobile=await User.findOne({mobile:mobile})
+        if(extMobile){
+            return res.status(400).json({"message":"Mobile no. is already in use"})
+        }
+        const salt=await bcrypt.genSalt(10)
+        password=await bcrypt.hash(password,salt)
+
+        let user = await User.create({
+            name:name,
+            email:email,
+            mobile:mobile,
+            password:password,
+            budget:budget,
+            startDate:startDate,
+            endDate:endDate
+        })
         res.status(201).json(user)
     }
     catch(error){
         console.log(error);
+        res.status(400).json({"message":error.message})
+    }
+}
+
+const loginUser=async(req,res)=>{
+    try {
+        let {email,password}=req.body
+        let userdetails=await User.findOne({email:email})
+        if(!userdetails){
+            return res.status(400).json({"message":"Provide a Valid Email-ID"})
+        }
+        let isPasswordValid=await bcrypt.compare(password,userdetails.password)
+        if(isPasswordValid){
+            const token=jwt.sign({user:{userId:userdetails._id,name:userdetails.name,email:userdetails.email,mobile:userdetails.mobile}},
+                process.env.JWT_SECRET
+            )
+            console.log(token)
+            res.status(200).json({"message":"Login Successful",userdetails,token})
+        }
+        else{
+            res.status(400).json({"message":"Invalid Password"})
+        }
+    } catch (error) {
+        console.log(error)
         res.status(400).json({"message":error.message})
     }
 }
@@ -125,6 +171,7 @@ async function getBudgetStatusInfo(req,res){
 
 module.exports={
     addUser,
+    loginUser,
     deleteUserInfo,
     addBudget,
     checkBudgetStatus,

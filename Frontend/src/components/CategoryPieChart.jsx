@@ -53,7 +53,7 @@ const CategoryPieChart = ({ data }) => {
 	return (
 		<div
 			className="dark-box"
-			style={{ width: "", height: "31svh" }}
+			style={{ width: "", height: "31.5svh" }}
 		>
 			<ResponsiveContainer
 				width="100%"

@@ -105,6 +105,23 @@ class ExpenseApi {
 			return { status: false };
 		}
 	}
+
+	//Update given expense
+	async updateExpense(updatedData, userId, expenseId) {
+		try {
+			if (userId.length == 24 && expenseId && updatedData) {
+				let res = await axios.put(
+					`${this.api}/expense/${userId}/${expenseId}`,
+					updatedData
+				);
+
+				return { data: res.data, status: true };
+			}
+		} catch (error) {
+			console.log("Error " + error);
+			return { status: false, message: error.message };
+		}
+	}
 }
 
 const expenseApi = new ExpenseApi();
