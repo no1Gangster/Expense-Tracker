@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useAuth } from "../Context/AuthContext";
 import authentication from "../ApiService/Authentication";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Signin() {
 	const authContext = useAuth();
@@ -21,11 +21,11 @@ function Signin() {
 			let user = { email, password };
 			const res = await authentication.signin(user);
 
-            console.log(res)
+			console.log(res);
 			if (res.status) {
 				alert("Logged In Successfully");
 
-                login(res.token, res.id)
+				login(res.token, res.id);
 				navigate("/");
 			} else {
 				alert(res.message);
@@ -37,27 +37,68 @@ function Signin() {
 	}
 
 	return (
-		<div className="container">
-			<div className="card">
-				<div className="card-body">
+		<div className="row bg-text-dark g-0 p-3 sign-page">
+			<div className="col-md-8 d-flex flex-column text-light mt-md-5 p-md-5">
+				<p className="fs-1 fw-bold">
+					Welcome <br />
+					Back
+				</p>
+				<p>Continue tracking expenses</p>
+				<p>
+					To your financial hub! Log in to manage your expenses with
+					ease.
+				</p>
+			</div>
+
+			<div
+				className="col-md-4 card bg-dark d-flex align-items-center bg-transparent"
+				style={{ border: "none" }}
+			>
+				<div className="card-body dark-box mt-5 p-4 d-flex flex-column flex-grow-0">
+					<h1 className="text-light my-2 mb-4 mx-auto">Sign In</h1>
 					<form onSubmit={handleSubmit}>
 						<input
-							type="text"
+							type="email"
 							placeholder="Email"
+							className="form-control bg-dark dark-input"
 							ref={mailRef}
+							required
 						/>
 						<br />
 						<input
 							type="password"
 							placeholder="Password"
+							className="form-control bg-dark dark-input"
 							ref={passRef}
+							required
 						/>
 						<br />
 						<input
 							type="submit"
 							value="Sign In"
+							className="btn mb-3 mx-auto"
+							style={{ backgroundColor: "var(--base-green)" }}
 						/>
 					</form>
+					<Link
+						to="/signup"
+						className="mx-auto"
+						style={{ color: "var(--neon-blue)", fontSize: "13px" }}
+					>
+						New User?
+					</Link>
+				</div>
+				<div className="text-white mx-auto mt-2">
+					<p
+						className=""
+						style={{ fontSize: "10px" }}
+					>
+						By Click on "Sign In" you agree to <br />
+						<Link className="text-white">
+							Terms of Service
+						</Link> |{" "}
+						<Link className="text-white">Privacy Policy</Link>
+					</p>
 				</div>
 			</div>
 		</div>

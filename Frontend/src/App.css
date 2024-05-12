@@ -140,7 +140,6 @@ option {
 	background-color: #363d44 !important;
 }
 
-
 .container-fluid {
 	padding-right: 0 !important;
 }
@@ -164,16 +163,16 @@ option {
 }
 
 .color-red {
-    color: var(--base-red);
+	color: var(--base-red);
 }
 .color-green {
-    color: var(--base-green);
+	color: var(--base-green);
 }
 .color-blue {
-    color: var(--base-blue);
+	color: var(--base-blue);
 }
 
-.pichart{
+.pichart {
 	@media (width > 992px) {
 		scale: 1.2;
 	}
@@ -181,4 +180,23 @@ option {
 
 .recharts-layer {
 	cursor: pointer;
+}
+
+.sign-page {
+	height: 91.7svh;
+	background-image: url("sign-cover.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-color: black;
+	background-position: left bottom;
+	@media (width < 768px) {
+		background-size: contain;
+	}
+}
+
+.d-vary-img {
+	display: block;
+	@media (width < 768px) {
+		display: none;
+	}
 }
