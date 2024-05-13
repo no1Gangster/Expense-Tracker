@@ -214,8 +214,6 @@ option {
 	}
 }
 
-/* .align-per-box {
-	display: flex;
-	align-self: start;
-	margin-left: 19%;
-} */
+.modal {
+	background-color: rgba(0, 0, 0, 0.5);
+}

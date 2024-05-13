@@ -9,6 +9,7 @@ import expenseOverview from "../workers/expenseOverview";
 import catgegoryWiseNet, { expenseTypeWiseSplit } from "../workers/expenseSort";
 import { useAuth } from "../Context/AuthContext";
 import filterExpenses from "../workers/expenseFilter";
+import BudgetContainer from "../components/BudgetContainer";
 
 function Stats() {
 	//Context variables
@@ -125,7 +126,7 @@ function Stats() {
 					)}
 				</div>
 				<div className="dark-box col mx-md-3 mx-3 p-md-5">
-					Budget Details
+					<BudgetContainer />
 				</div>
 			</div>
 			<div className="row w-100 mx-auto justify-content-between">
