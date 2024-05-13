@@ -7,7 +7,13 @@ const{
     getExpenseSortedByAmount,
     getExpenseSummaryLastSevenDays,
     getExpenseSortedByExpenseDate,
-    getOverview
+    getOverview,
+    filterExpenseByDate,
+    filterExpenseByMonth,
+    filterExpenseByYear,
+    filterExpenseByType,
+    filterExpenseByCategory,
+    // filterExpenseByNotes
 }=require("../controller/expense.controller")
 
 const expenseRouter = express.Router()
@@ -25,6 +31,8 @@ expenseRouter.get("/filterByMonth/:userId",filterExpenseByMonth)
 expenseRouter.get("/filterByYear/:userId",filterExpenseByYear)
 expenseRouter.get("/filterByType/:userId",filterExpenseByType)
 expenseRouter.get("/filterByCategory/:userId",filterExpenseByCategory)
+// expenseRouter.get("/filterByNotes/:userId",filterExpenseByNotes)
+
 
 
 module.exports = expenseRouter
