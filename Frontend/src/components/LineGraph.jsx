@@ -10,11 +10,17 @@ import {
 	Legend,
 } from "recharts";
 
-export default function LineGraph({ data }) {
+export default function LineGraph({ data, dateData }) {
 	const handleChartClick = (event) => {
 		if (event && event.activePayload && event.activePayload[0]) {
 			const { payload } = event.activePayload[0];
 			console.log(payload.date); // Logging the clicked value
+			dateData({
+				duration: "day",
+				expType: "all",
+				search: "",
+				day: payload.date,
+			});
 		}
 	};
 

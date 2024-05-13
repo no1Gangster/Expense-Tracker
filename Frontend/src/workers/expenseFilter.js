@@ -2,7 +2,7 @@ import axios from "axios";
 import expenseApi from "../ApiService/Expense";
 
 export default async function filterExpenses(filters, id) {
-	console.log(filters);
+	console.log(filters, id);
 
 	let date = new Date();
 	let month = date.getMonth() + 1;
@@ -21,12 +21,15 @@ export default async function filterExpenses(filters, id) {
 		startDate = sevenDaysPrev.toISOString().split("T")[0];
 		endDate = date.toISOString().split("T")[0];
 		flag = true;
-	} 
-	else if (filters && filters.duration == "month")
+	} else if (filters && filters.duration == "month")
 		durRes = await expenseApi.getMonthExpense(month, year, id);
 	else if (filters && filters.duration == "year")
 		durRes = await expenseApi.getYearlyExpense(year, id);
-	else if (filters && filters.duration.duration == "custom") {
+	else if (filters && filters.duration == "day") {
+		flag = true;
+		startDate = filters.day;
+		endDate = filters.day;
+	} else if (filters && filters.duration.duration == "custom") {
 		startDate = filters.duration.dateRange[0];
 		endDate = filters.duration.dateRange[1];
 		flag = true;
@@ -34,8 +37,9 @@ export default async function filterExpenses(filters, id) {
 
 	let dateRange = { startDate, endDate };
 
-	if (flag) durRes = await expenseApi.getDataRangeExpense(dateRange, id);
-
+	if (flag && id) {
+		durRes = await expenseApi.getDataRangeExpense(dateRange, id);
+	}
 
 	let res;
 	if (filters.expType == "all") res = await expenseApi.getExpenses(id);

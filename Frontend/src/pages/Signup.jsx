@@ -46,11 +46,19 @@ function Signup() {
 			<div className="col-md-8 d-flex flex-column text-light mt-md-5 p-md-5">
 				<p className="fs-1 fw-bold">Start Your Financial Journey</p>
 				<p>Sign Up for Our Expense Tracker</p>
-				<p className="d-vary-img">Ready to take control of your finances? Sign up now to start tracking your expenses effortlessly!</p>
+				<p className="d-vary-img">
+					Ready to take control of your finances? Sign up now to start
+					tracking your expenses effortlessly!
+				</p>
 			</div>
-			<div className="col-md-4 card bg-transparent d-flex align-items-center" style={{ border: "none"}}>
-				<div className="card-body dark-box mt-md-5 p-4 d-flex flex-column flex-grow-0">
-				<h1 className="text-light my-2 mb-4 mx-auto">Create new account</h1>
+			<div
+				className="col-md-4 card bg-transparent d-flex align-items-center"
+				style={{ border: "none" }}
+			>
+				<div className="card-body dark-box mt-md-5 p-4 d-flex flex-column flex-grow-0 glass-morph">
+					<h1 className="text-light my-2 mb-4 mx-auto">
+						Create new account
+					</h1>
 					<form onSubmit={handleSubmit}>
 						<input
 							type="text"
@@ -90,15 +98,20 @@ function Signup() {
 						<input
 							type="submit"
 							className="btn"
-							style={{backgroundColor:"var(--neon-blue)"}}
+							style={{ backgroundColor: "var(--neon-green)" }}
 							value="Sign Up"
 						/>
 					</form>
-					<Link to="/signin"className="mx-auto" style={{color:"var(--base-green)",fontSize:"13px"}}>Already have an account?</Link>
-				</div>
-				<div className="text-white mx-auto mt-2">
+					<Link
+						to="/signin"
+						className="mx-auto"
+						style={{ color: "var(--base-blue)", fontSize: "13px" }}
+					>
+						Already have an account?
+					</Link>
+					<br />
 					<p
-						className=""
+						className="align-self-center text-white"
 						style={{ fontSize: "10px" }}
 					>
 						By Click on "Sign Up" you agree to <br />

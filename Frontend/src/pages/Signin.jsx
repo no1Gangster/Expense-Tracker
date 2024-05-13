@@ -54,13 +54,16 @@ function Signin() {
 				className="col-md-4 card bg-dark d-flex align-items-center bg-transparent"
 				style={{ border: "none" }}
 			>
-				<div className="card-body dark-box mt-5 p-4 d-flex flex-column flex-grow-0">
+				<div
+					className="card-body dark-box p-4 d-flex flex-grow-0 flex-column glass-morph"
+					style={{ marginTop: "10svh" }}
+				>
 					<h1 className="text-light my-2 mb-4 mx-auto">Sign In</h1>
 					<form onSubmit={handleSubmit}>
 						<input
 							type="email"
 							placeholder="Email"
-							className="form-control bg-dark dark-input"
+							className="form-control bg-dark dark-input mt-5"
 							ref={mailRef}
 							required
 						/>
@@ -77,20 +80,19 @@ function Signin() {
 							type="submit"
 							value="Sign In"
 							className="btn mb-3 mx-auto"
-							style={{ backgroundColor: "var(--base-green)" }}
+							style={{ backgroundColor: "var(--neon-green)" }}
 						/>
 					</form>
 					<Link
 						to="/signup"
 						className="mx-auto"
-						style={{ color: "var(--neon-blue)", fontSize: "13px" }}
+						style={{ color: "var(--base-blue)", fontSize: "13px" }}
 					>
 						New User?
 					</Link>
-				</div>
-				<div className="text-white mx-auto mt-2">
+					<br />
 					<p
-						className=""
+						className="align-self-center text-white"
 						style={{ fontSize: "10px" }}
 					>
 						By Click on "Sign In" you agree to <br />

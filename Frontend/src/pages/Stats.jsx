@@ -80,12 +80,12 @@ function Stats() {
 	//Gets filter from Sidebar compenent, redirects the filters to expenseFilter worker to get filtered data.
 	async function getFilters(filters) {
 		if (!filters || !filters.duration || filters.duration == "all") {
-			console.log(filters);
 			setSidebarExpType(filters.expType);
 			refreshExpenseHistory();
 		}
-
+		
 		if (filters && filters.duration != "all") {
+			console.log(filters);
 			let filteredData = await filterExpenses(filters, id);
 			setExpenses(filteredData);
 		}
@@ -130,7 +130,7 @@ function Stats() {
 			</div>
 			<div className="row w-100 mx-auto justify-content-between">
 				<div className="rounded col-md-7 ms-md-3 p-md-0 color-light">
-					{expTypeData && <LineGraph data={expTypeData} />}
+					{expTypeData && <LineGraph data={expTypeData} dateData={getFilters}/>}
 				</div>
 				<div className="rounded col mx-md-3 pt-2 p-md-0">
 					{expCatData && <CategoryPieChart data={expCatData} />}
