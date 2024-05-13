@@ -33,8 +33,7 @@ const userSchema = new mongoose.Schema({
         required:function(){
             return this.budget>0
         }
-    },
-
+    }
 })
 
 const User = mongoose.model("User",userSchema)

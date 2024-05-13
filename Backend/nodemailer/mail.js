@@ -33,21 +33,13 @@ async function sendMail(userEmail, userBudget, totalDebit, startDate, endDate, b
       subject: subject,
       text:text,
     };
-
     const result = await transport.sendMail(mailOptions);
     console.log("Message Sent", result);
+
     transport.close();
+
   } catch (error) {
     console.log(error);
-  }
-}
-
-async function call(userEmail, userBudget, totalDebit, startDate, endDate, balance,budgetStatus) {
-  try{
-    console.log("called");
-    await sendMail(userEmail, userBudget, totalDebit, startDate, endDate, balance,budgetStatus);
-  }catch(error){
-    console.log("Error",error);
   }
 }
 
@@ -89,4 +81,6 @@ The Expense Tracker Team`;
   return {subject, text}
 }
 
-module.exports = call;
+module.exports = {
+  sendMail
+}

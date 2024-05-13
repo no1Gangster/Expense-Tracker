@@ -4,17 +4,18 @@ const{
     addBudget,
     getUsers,
     getBudgetStatusInfo,
-    loginUser
+    loginUser,
+    verifyOTP
 } = require("../controller/user.controller")
 
 const userRouter = express.Router()
 
-// userRouter.post("/",addUser)
 userRouter.get("/",getUsers)
 userRouter.delete("/:userId",deleteUserInfo)
 userRouter.put("/:userId/budget",addBudget)
 userRouter.get("/:userId/budgetStatus",getBudgetStatusInfo)
-userRouter.post("/")
+
+userRouter.post("/verifyotp",verifyOTP)
 
 //login and signup routes
 

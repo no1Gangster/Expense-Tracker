@@ -3,6 +3,9 @@ const Expense = require("../model/expense.model");
 // const bcrypt=require('bcrypt')
 const bcrypt=require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const mail = require('../nodemailer/mail');
+const {otpMap,sendOtpMail, getOTP} =require('../nodemailer/otpmail')
+const fs = require('fs')
 
 //Post a user detail
 async function addUser(req,res){
@@ -19,6 +22,9 @@ async function addUser(req,res){
         const salt=bcrypt.genSaltSync(10)
         password=bcrypt.hashSync(password,salt)
 
+        //sends otp to users' email
+        const otp = await sendOtpMail(email)
+
         let user = await User.create({
             name:name,
             email:email,
@@ -28,7 +34,8 @@ async function addUser(req,res){
             startDate:startDate,
             endDate:endDate
         })
-        res.status(201).json(user)
+
+        res.status(201).json({user,otp})
     }
     catch(error){
         console.log(error);
@@ -169,6 +176,52 @@ async function getBudgetStatusInfo(req,res){
     }
 }
 
+//verify otp entered by user with stored otp against user email
+async function verifyOTP(req,res){
+    const {otp} = req.body
+    const email = getEmailFromOtp(otp)
+
+    if(!email){
+        return res.status(400).json("Invalid OTP")
+    }
+
+    const storedOTP = getOTP(email)
+
+    if(storedOTP === otp+''){
+        deleteOTP(email)
+        res.status(201).json("Otp verified Successfully")
+    }else{
+        res.status(400).json("Invalid Otp")
+    }   
+}
+
+
+//Obtains email on comparing otp with stored otp 
+function getEmailFromOtp(otp){
+    const data = fs.readFileSync('otp.txt','utf-8')
+    const lines = data.split('\n')
+    for(let line of lines){
+        const [storedEmail,storedOTP] = line.split(':')
+        //otp in req.body-Number, storedOtp-string
+        if(otp+'' === storedOTP){
+            return storedEmail
+        }
+    }
+    return null
+}
+
+function deleteOTP(email){
+    const data = fs.readFileSync('otp.txt','utf-8')
+    const lines = data.split('\n')
+    //overwrites existing email:otp by filtering against user's email  
+    const newData = lines.filter(line => {
+        const storedEmail = line.split(':')[0];
+        return email === storedEmail;
+    });
+    fs.writeFileSync('otp.txt', newData.join('\n'));
+}
+
+
 module.exports={
     addUser,
     loginUser,
@@ -176,5 +229,6 @@ module.exports={
     addBudget,
     checkBudgetStatus,
     getUsers,
-    getBudgetStatusInfo
+    getBudgetStatusInfo,
+    verifyOTP
 }

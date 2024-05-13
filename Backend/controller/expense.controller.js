@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const Expense = require("../model/expense.model")
 const User = require("../model/user.model")
 const { checkBudgetStatus } = require("./user.controller")
-const mail = require('../nodemailer/mail');
+const {sendMail}= require('../nodemailer/mail');
 
 //post an expense 
 async function addExpense(req,res){
@@ -17,7 +17,7 @@ async function addExpense(req,res){
                if(budgetStatusResponse.status==="success"){
                     const {userBudget,totalDebit,balance,budgetStatus} = budgetStatusResponse
                     if(budgetStatus.includes("Exceeded") || budgetStatus.includes("reached 50%") || budgetStatus.includes("reached 90%")){
-                        await mail(user.email,userBudget,totalDebit,user.startDate,user.endDate,balance,budgetStatus)
+                        await sendMail(user.email,userBudget,totalDebit,user.startDate,user.endDate,balance,budgetStatus)
                         return res.status(200).json({expense,budgetStatus:budgetStatus,status:"mail_sent"})
                     } else {
                         return res.status(201).json({expense,budgetStatus:budgetStatus});
