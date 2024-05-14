@@ -202,13 +202,17 @@ option {
 }
 
 .glass-morph {
-	background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+	background: linear-gradient(
+		135deg,
+		rgba(255, 255, 255, 0.1),
+		rgba(255, 255, 255, 0)
+	);
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(10px);
 	border-radius: 20px;
-	border :1px solid rgba(255, 255, 255, 0.18);
+	border: 1px solid rgba(255, 255, 255, 0.18);
 	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-	align-self : start;
+	align-self: start;
 	@media (width < 768px) {
 		align-self: center;
 	}
@@ -216,4 +220,21 @@ option {
 
 .modal {
 	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.video-container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	height: 92svh;
+}
+
+.video-container video {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
