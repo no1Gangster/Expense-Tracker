@@ -1,18 +1,27 @@
 import axios from "axios";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 //Uses expense router to provide API services
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+//Uses expense router to provide API services
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 class ExpenseApi {
 	constructor() {
 		this.api = String(import.meta.env.VITE_BACKEND_API);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 	//Get user expenses sorted by date
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+
+	//Get user expenses sorted by date
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 	async getExpenses(id) {
 		try {
 			if (id.length == 24) {
@@ -27,9 +36,13 @@ class ExpenseApi {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	//Gets user expenses of selected expense type
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+	//Gets user expenses of selected expense type
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 	async getTypeData(id, type) {
 		try {
 			if (id.length == 24) {
@@ -44,9 +57,13 @@ class ExpenseApi {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	//Posts new expense
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+	//Posts new expense
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 	async addExpense(data) {
 		console.log(data);
 		try {
@@ -60,9 +77,13 @@ class ExpenseApi {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	//Deletes existing expense
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+	//Deletes existing expense
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 	async deleteExpense(expenseId, userId) {
 		console.log(expenseId, userId);
 		try {
@@ -77,7 +98,10 @@ class ExpenseApi {
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 
 	//Gets expenses of selected month
 	async getMonthExpense(month, year, userId) {
@@ -123,7 +147,27 @@ class ExpenseApi {
 			return { status: false };
 		}
 	}
+<<<<<<< HEAD
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+
+	//Update given expense
+	async updateExpense(updatedData, userId, expenseId) {
+		try {
+			if (userId.length == 24 && expenseId && updatedData) {
+				let res = await axios.put(
+					`${this.api}/expense/${userId}/${expenseId}`,
+					updatedData
+				);
+
+				return { data: res.data, status: true };
+			}
+		} catch (error) {
+			console.log("Error " + error);
+			return { status: false, message: error.message };
+		}
+	}
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 }
 
 const expenseApi = new ExpenseApi();

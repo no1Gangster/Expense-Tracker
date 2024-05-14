@@ -1,8 +1,13 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 //Finds net expense for each category
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+
+//Finds net expense for each category
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 export default async function catgegoryWiseNet(data, exp_type) {
 	let categoryExp = {
 		personal: 0,
@@ -15,6 +20,7 @@ export default async function catgegoryWiseNet(data, exp_type) {
 	if (exp_type == "credit" || exp_type == "debit" || exp_type == "pending") {
 		data.forEach((expense) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if (expense.exp_category == "personal") categoryExp.personal += expense.amount
 			if (expense.exp_category == "food") categoryExp.food += expense.amount
 			if (expense.exp_category == "utility") categoryExp.utility += expense.amount
@@ -22,6 +28,8 @@ export default async function catgegoryWiseNet(data, exp_type) {
 			if (expense.exp_category == "other") categoryExp.other += expense.amount
 		})
 =======
+=======
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 			if (expense.exp_category == "personal")
 				categoryExp.personal += expense.amount;
 			if (expense.exp_category == "food")
@@ -33,7 +41,10 @@ export default async function catgegoryWiseNet(data, exp_type) {
 			if (expense.exp_category == "other")
 				categoryExp.other += expense.amount;
 		});
+<<<<<<< HEAD
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 	} else {
 		data.forEach((expense) => {
 			if (expense.exp_category == "personal") {
@@ -68,9 +79,13 @@ export default async function catgegoryWiseNet(data, exp_type) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 //Formats data into PieChart component usable form
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+//Formats data into PieChart component usable form
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 function format(dataObj) {
 	let newData = [
 		{
@@ -101,9 +116,13 @@ function format(dataObj) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 //Filters out total of each expense type for each date
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+//Filters out total of each expense type for each date
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 export function expenseTypeWiseSplit(data) {
 	let newData = data.map((item) => ({
 		date: item.exp_date,
@@ -117,18 +136,24 @@ export function expenseTypeWiseSplit(data) {
 			if (data[i].exp_date === newData[j].date) {
 				if (data[i].exp_type === "debit") {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					newData[j].debit = data[i].amount;
 				} else if (data[i].exp_type === "credit") {
 					newData[j].credit = data[i].amount;
 				} else if (data[i].exp_type === "pending") {
 					newData[j].pending = data[i].amount;
 =======
+=======
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 					newData[j].debit += data[i].amount;
 				} else if (data[i].exp_type === "credit") {
 					newData[j].credit += data[i].amount;
 				} else if (data[i].exp_type === "pending") {
 					newData[j].pending += data[i].amount;
+<<<<<<< HEAD
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 				}
 			}
 		}

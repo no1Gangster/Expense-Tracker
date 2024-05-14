@@ -18,12 +18,17 @@ function ExpenseForm({ newExpense }) {
 		dateRef.current.value = todays_date;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	useEffect(()=> {
 =======
 
 	useEffect(() => {
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+
+	useEffect(() => {
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 		setDate();
 	}, []);
 

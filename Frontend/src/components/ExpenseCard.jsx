@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import expenseApi from "../ApiService/Expense";
 import { AuthContext } from "../Context/AuthContext";
+import Modal from "./Modal";
 
 function ExpenseCard({ category, note, date, expense, type, _id, update }) {
 	//Get Context Variables
@@ -35,60 +36,81 @@ function ExpenseCard({ category, note, date, expense, type, _id, update }) {
 		update();
 	}
 
+	const [showModal, setShowModal] = useState(false);
+	const [data, setData] = useState({});
+
+	function updateExpense() {
+		setData({
+			category,
+			note,
+			date,
+			expense,
+			type,
+			_id,
+		});
+		setShowModal(true);
+	}
+
 	return (
-		<div className="container mb-3 px-2 z-3 position-relative">
-			<div className="card px-md-5 card-element text-white">
-				<div className="card-body">
-					<div className="row">
-						<div className="col d-flex w-50">
-							<img
-								src={img_url}
-								alt=""
-								height={"50svh"}
-							/>
-						</div>
-						<div className="col">
-							<h5>{note}</h5>
-						</div>
-						<div className="col">
-							<p>{date}</p>
-						</div>
-						<div className="col fw-medium">
-							{sign} ₹{expense}
-						</div>
-						<div
-							className="col fw-medium"
-							style={style}
-						>
-							{styled_type}
-						</div>
-						<div className="col crud-btns">
-							<div className="d-flex flex-row g-2">
-								<button className="btn btn-primary mx-1 card-btns">
-									<img
-										src="/edit-icon.png"
-										alt="Edit"
-										height={"20svh"}
-									/>
-								</button>
-								<button
-									className="btn btn-danger mx-1 card-btns"
-									onClick={() => {
-										deleteExpense(_id, id);
-									}} //deleteExpense(expense._id, user.id)
-								>
-									<img
-										src="/bin-icon.png"
-										alt="Delete"
-										height={"20svh"}
-									/>
-								</button>
+		<>
+			{showModal && <Modal data={data} showModal={setShowModal} update={update} />}
+			<div className="container mb-3 px-2 z-3 position-relative">
+				<div className="card px-md-5 card-element text-white">
+					<div className="card-body">
+						<div className="row">
+							<div className="col d-flex w-50">
+								<img
+									src={img_url}
+									alt=""
+									height={"50svh"}
+								/>
+							</div>
+							<div className="col">
+								<h5>{note}</h5>
+							</div>
+							<div className="col">
+								<p>{date}</p>
+							</div>
+							<div className="col fw-medium">
+								{sign} ₹{expense}
+							</div>
+							<div
+								className="col fw-medium"
+								style={style}
+							>
+								{styled_type}
+							</div>
+							<div className="col crud-btns">
+								<div className="d-flex flex-row g-2">
+									<button
+										className="btn btn-primary mx-1 card-btns"
+										onClick={updateExpense}
+									>
+										<img
+											src="/edit-icon.png"
+											alt="Edit"
+											height={"20svh"}
+										/>
+									</button>
+									<button
+										className="btn btn-danger mx-1 card-btns"
+										onClick={() => {
+											deleteExpense(_id, id);
+										}} //deleteExpense(expense._id, user.id)
+									>
+										<img
+											src="/bin-icon.png"
+											alt="Delete"
+											height={"20svh"}
+										/>
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 

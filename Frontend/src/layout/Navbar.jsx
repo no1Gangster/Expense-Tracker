@@ -1,17 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 
 function Navbar() {
 	const authContext = useAuth();
-	const { id, isLoggedIn, login, logout } = authContext;
-	function handleLogin(e) {
-		login();
-		console.log({ id, isLoggedIn });
-	}
+	const { isLoggedIn, logout } = authContext;
+
+	const navigate = useNavigate();
+
 	function handleLogout(e) {
 		logout();
-		console.log({ id, isLoggedIn });
+		console.log({ isLoggedIn });
+		navigate("/signin");
 	}
 	return (
 		<div style={{ marginBottom: "75px" }}>
@@ -57,40 +57,56 @@ function Navbar() {
 							<ul className="navbar-nav justify-content-center flex-grow-1 d-flex pe-5 ">
 								<li className="nav-item navbar-items me-2">
 									<Link
-										className="nav-link"
+										className="clear-link"
 										aria-current="page"
 										to="/"
-									>
-										Home
+										>
+										<p
+											data-bs-dismiss="offcanvas"
+											className="nav-link"
+											>
+											Home
+										</p>
 									</Link>
 								</li>
 								<li className="nav-item navbar-items me-2">
-									<Link
-										className="nav-link "
+								<Link
+										className="clear-link"
 										aria-current="page"
 										to="/stats"
-									>
-										Stats
+										>
+										<p
+											data-bs-dismiss="offcanvas"
+											className="nav-link"
+											>
+											Stats
+										</p>
 									</Link>
 								</li>
 								<li className="nav-item navbar-items">
-									<Link
-										className="nav-link"
+								<Link
+										className="clear-link"
+										aria-current="page"
 										to="/about"
 									>
-										About Us
+										<p
+											data-bs-dismiss="offcanvas"
+											className="nav-link"
+											>
+											About
+										</p>
 									</Link>
 								</li>
 							</ul>
 						</div>
 					</div>
 					{!isLoggedIn ? (
-						<button
+						<Link
 							className="btn btn-neon ms-auto me-2"
-							onClick={handleLogin}
+							to="/signin"
 						>
 							Log In
-						</button>
+						</Link>
 					) : (
 						<button
 							className="btn btn-neon ms-auto me-2"

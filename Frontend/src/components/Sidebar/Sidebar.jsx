@@ -1,14 +1,19 @@
 import { addDays, format } from "date-fns";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useEffect, useState } from "react";
 =======
 import { useEffect, useRef, useState } from "react";
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+import { useEffect, useRef, useState } from "react";
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import "./Sidebar.css";
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 function Sidebar({ returnExpType }) {
 	const [expType, setExpType] = useState("all");
@@ -18,6 +23,8 @@ function Sidebar({ returnExpType }) {
 			startDate: new Date(),
 			endDate: addDays(new Date(), 7),
 =======
+=======
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 function Sidebar({ filters }) {
 	const [expType, setExpType] = useState("all");
 	const [duration, setDuration] = useState("all");
@@ -29,7 +36,10 @@ function Sidebar({ filters }) {
 		{
 			startDate: addDays(new Date(), -7),
 			endDate: new Date(),
+<<<<<<< HEAD
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 			key: "selection",
 		},
 	]);
@@ -38,6 +48,7 @@ function Sidebar({ filters }) {
 		setExpType(e.target.value);
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -52,6 +63,8 @@ function Sidebar({ filters }) {
 	// 	);
 	// }, [date]);
 =======
+=======
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 	function changeDuration(e) {
 		setDuration(e.target.value);
 	}
@@ -73,7 +86,10 @@ function Sidebar({ filters }) {
 			});
 		else filters({ expType, duration, search: searchRef.current.value }); //Returns data object for remaining data filters
 	}
+<<<<<<< HEAD
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 
 	return (
 		<div
@@ -116,16 +132,22 @@ function Sidebar({ filters }) {
 				</div>
 				<div className="offcanvas-body">
 <<<<<<< HEAD
+<<<<<<< HEAD
 					<div>Select Expense Type:</div>
 					<br />
 					<div>
 						<form onSubmit={handleSubmit}>
 =======
+=======
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 					<div>
 						<form onSubmit={handleSubmit}>
 							<div>Select Expense Type:</div>
 							<br />
+<<<<<<< HEAD
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 							<div className="form-check">
 								<input
 									className="form-check-input"
@@ -135,9 +157,12 @@ function Sidebar({ filters }) {
 									onChange={showValue}
 									value={"all"}
 <<<<<<< HEAD
+<<<<<<< HEAD
 									defaultChecked
 =======
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 								/>
 								<label className="form-check-label color-light">
 									All
@@ -185,6 +210,7 @@ function Sidebar({ filters }) {
 							<br />
 							<br />
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<p>Select Date Range:</p>
 							<div>
 								<DateRange
@@ -200,6 +226,8 @@ function Sidebar({ filters }) {
 									endDatePlaceholder=""
 								/>
 =======
+=======
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 							<p>Select Duration:</p>
 							<div className="form-check">
 								<input
@@ -268,7 +296,10 @@ function Sidebar({ filters }) {
 										endDatePlaceholder=""
 									/>
 								)}
+<<<<<<< HEAD
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 							</div>
 							<br />
 							<br />
@@ -277,9 +308,13 @@ function Sidebar({ filters }) {
 									type="text"
 									className="form-control dark-input bg-dark"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 									ref={searchRef}
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+									ref={searchRef}
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 									placeholder="Description"
 									aria-label="Recipient's username"
 									aria-describedby="button-addon2"
@@ -299,10 +334,13 @@ function Sidebar({ filters }) {
 							<div>
 								<input
 <<<<<<< HEAD
+<<<<<<< HEAD
 									type="submit"
 									className="btn btn-success"
 									value="Apply Filters"
 =======
+=======
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 									type="reset"
 									value="Clear"
 									className="btn btn-danger me-2"
@@ -316,7 +354,10 @@ function Sidebar({ filters }) {
 									className="btn btn-success"
 									value="Apply Filters"
 									data-bs-dismiss="offcanvas"
+<<<<<<< HEAD
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 								/>
 							</div>
 						</form>

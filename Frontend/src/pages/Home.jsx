@@ -13,6 +13,7 @@ function Home() {
 	let { isLoggedIn, id } = authContext;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	const [expenses, setExpenses] = useState([]);
 	const [overview, setOverview] = useState([]);
 	const [update, setUpdate] = useState(0);
@@ -22,15 +23,24 @@ function Home() {
 	const [overview, setOverview] = useState([]);		//Sets net overview data
 	const [update, setUpdate] = useState(0);			//Use to refresh components on different actions
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+	const [expenses, setExpenses] = useState([]); //Stores expenses to display
+	const [overview, setOverview] = useState([]); //Sets net overview data
+	const [update, setUpdate] = useState(0); //Use to refresh components on different actions
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 
 	//Fetches expenses list and sets it in expenses state variable
 	async function fetchData() {
 		try {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if(id && id.length == 24) {
 =======
 			if (id && id.length == 24) {
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+			if (id && id.length == 24) {
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 				let res = await expenseApi.getExpenses(id);
 				setExpenses(res.data);
 			}
@@ -39,6 +49,7 @@ function Home() {
 		}
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 	//Calculates Total Credit, Total Debit and Total Pending for the expenses in the expenses state variable
@@ -49,6 +60,11 @@ function Home() {
 	async function calculateOverview() {
 		if (expenses) {
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+	//Calculates Total Credit, Total Debit and Total Pending for the expenses in the expenses state variable
+	async function calculateOverview() {
+		if (expenses) {
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 			let res = await expenseOverview(expenses);
 			setOverview(res);
 		}
@@ -59,19 +75,26 @@ function Home() {
 		setUpdate(update + 1);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 =======
 
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 	//Expenses are fetched inititally on page load.
 	//Later if new data added or removed, the components are re-rendered with new data.
 	useEffect(() => {
 		fetchData();
 	}, [isLoggedIn, id, update]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 =======
 >>>>>>> ce1ca56ef88afa355cc5e120e01c45ff0f313a92
+=======
+>>>>>>> 5607fd0bcda78b0af9f695ec7ada06aef0e302c4
 
 	//After expenses are fetched, its corresponding overview is calculated
 	useEffect(() => {
