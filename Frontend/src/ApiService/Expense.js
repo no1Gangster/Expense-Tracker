@@ -1,4 +1,5 @@
 import axios from "axios";
+import { id } from "date-fns/locale";
 //Uses expense router to provide API services
 class ExpenseApi {
 	constructor() {
@@ -94,7 +95,8 @@ class ExpenseApi {
 	//Gets expenses of given range
 	async getDataRangeExpense(dateRange, userId) {
 		try {
-			if (userId.length == 24 && dateRange) {
+			console.log(dateRange.startDate, dateRange.endDate, userId);
+			if (userId && userId.length == 24 && dateRange) {
 				let res = await axios.get(
 					`${this.api}/expense/filterByDates/${userId}?startDate=${dateRange.startDate}&endDate=${dateRange.endDate}`
 				);

@@ -19,4 +19,5 @@ const [state, setState] = useState([
 	months={2}
 	ranges={state}
 	direction="horizontal"
+	className="d-flex flex-column justify-content-center align-items-center m-0 p-0"
 />;
