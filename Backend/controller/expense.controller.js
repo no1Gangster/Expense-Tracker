@@ -328,29 +328,28 @@ async function filterExpenseByCategory(req,res){
         res.status(400).json({"message":error.message})
     }
 }
-// async function filterExpenseByNotes(req,res){
-//     try {
-//         let userId=req.params.userId
-//         let note=req.query.note
-//         // let categoryRegex=new RegExp(note,'i')
-//         // let expense=await Expense.find({userId,note:{$regex:categoryRegex}})
-//         let noteKeywords = note.split(/\s+/).filter(Boolean);
-//         console.log(noteKeywords)
-//         let regexPatterns = noteKeywords.map(keyword => new RegExp(keyword, 'i'));
-//         let categoryRegex = { $regex: regexPatterns.join('|') };
-//         let expense = await Expense.find({ userId, note: categoryRegex });
-
-//         if(expense.length>0){
-//             res.status(200).json(expense)
-//         }
-//         else{
-//             res.status(404).json({"message":`No Search Result`})
-//         }
-//     }catch (error) {
-//         console.log(error)
-//         res.status(400).json({"message":error.message})
-//     }
-// }
+async function filterExpenseByNotes(req,res){
+    try {
+        let userId=req.params.userId
+        let note=req.query.note
+        let categoryRegex=new RegExp(note,'i')
+        let expense=await Expense.find({userId,note:{$regex:categoryRegex}})
+        // let noteKeywords = note.split(/\s+/).filter(Boolean);
+        // console.log(noteKeywords)
+        // let regexPatterns = noteKeywords.map(keyword => new RegExp(keyword, 'i'));
+        // let categoryRegex = { $regex: regexPatterns.join('|') };
+        // let expense = await Expense.find({ userId, note: categoryRegex });
+        if(expense.length>0){
+            res.status(200).json(expense)
+        }
+        else{
+            res.status(404).json({"message":`No Search Result`})
+        }
+    }catch (error) {
+        console.log(error)
+        res.status(400).json({"message":error.message})
+    }
+}
 
 module.exports={
     addExpense,
@@ -366,5 +365,5 @@ module.exports={
     filterExpenseByYear,
     filterExpenseByType,
     filterExpenseByCategory,
-    // filterExpenseByNotes
+    filterExpenseByNotes
 }
