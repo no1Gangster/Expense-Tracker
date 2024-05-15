@@ -40,7 +40,8 @@ function BudgetModal({ update, showModal, msg }) {
 			alert(`Budget ${msg}ed successfully`);
 		} else console.log(res);
 
-        await update();
+		toggleVisibility(false);
+		await update();
 	}
 
 	return (
@@ -109,16 +110,11 @@ function BudgetModal({ update, showModal, msg }) {
 							>
 								Cancel
 							</button>
-							<button
-								type="button"
+							<input
+								type="submit"
 								className="btn btn-primary"
-								onClick={() => {
-									addBudget();
-                                    toggleVisibility(false);
-								}}
-							>
-								{msg} Budget
-							</button>
+								value={`${msg} Budget`}
+							/>
 						</div>
 					</form>
 				</div>

@@ -71,6 +71,7 @@ function Signin() {
 						<input
 							type="password"
 							placeholder="Password"
+							minLength={6}
 							className="form-control bg-dark dark-input"
 							ref={passRef}
 							required
