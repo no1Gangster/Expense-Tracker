@@ -85,7 +85,7 @@ function Stats() {
 			refreshExpenseHistory();
 		}
 		
-		if (filters && filters.duration != "all") {
+		if (filters ) {
 			console.log(filters);
 			let filteredData = await filterExpenses(filters, id);
 			setExpenses(filteredData);
@@ -101,7 +101,9 @@ function Stats() {
 			sidebarExpType == "pending"
 		)
 			fetchTypeData();
-		else fetchData();
+		else
+		 fetchData();
+
 	}, [isLoggedIn, id, update, sidebarExpType]);
 
 	//After expenses are fetched, its corresponding overview is calculated

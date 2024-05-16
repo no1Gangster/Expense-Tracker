@@ -45,8 +45,27 @@ export default async function filterExpenses(filters, id) {
 	if (filters.expType == "all") res = await expenseApi.getExpenses(id);
 	else res = await expenseApi.getTypeData(id, filters.expType);
 
-	const dur = durRes.data;
+	let dur;
+
+	try {
+		dur = durRes.data;
+	} catch (error) {
+		dur  = [];
+	}
 	const expenses = res.data;
+
+	let searchData = [];
+	if (filters && filters.search) {
+		try {
+			let searchRes = await expenseApi.filterByDescription(
+				id,
+				filters.search
+			);
+			searchData = searchRes.data;
+		} catch (error) {
+			console.log(error);
+		}
+	}
 
 	let common = [];
 	dur &&
@@ -58,5 +77,27 @@ export default async function filterExpenses(filters, id) {
 				common.push(durItem);
 			}
 		});
-	return common;
+
+	console.log(common);
+
+	if (common.length == 0) {
+		common = expenses;
+	}
+
+	let foundData = [];
+	if (searchData.length > 0) {
+		common &&
+			common.forEach((item) => {
+				const commonExpense = searchData.find(
+					(expense) => expense._id === item._id
+				);
+				if (commonExpense) {
+					foundData.push(item);
+				}
+			});
+	} else return common;
+
+	console.log(foundData);
+
+	return foundData;
 }

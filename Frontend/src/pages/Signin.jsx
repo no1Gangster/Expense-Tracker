@@ -21,7 +21,7 @@ function Signin() {
 			let user = { email, password };
 			const res = await authentication.signin(user);
 
-			console.log(res);
+			// console.log(res);
 			if (res.status) {
 				alert("Logged In Successfully");
 

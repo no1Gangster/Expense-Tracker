@@ -10,7 +10,7 @@ class Budget {
 			let res = await axios.get(
 				`${this.api}/user/${userId}/budgetStatus`
 			);
-			console.log(res);
+			// console.log(res);
 			return { status: true, data: res.data };
 		} catch (error) {
 			console.log(error);
@@ -29,7 +29,7 @@ class Budget {
 				startDate,
 				endDate,
 			});
-			console.log(res);
+			// console.log(res);
 			return { status: true, res: res.body };
 		} catch (error) {
 			console.log(error);
