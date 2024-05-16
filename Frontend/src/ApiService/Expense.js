@@ -124,6 +124,18 @@ class ExpenseApi {
 			return { status: false, message: error.message };
 		}
 	}
+
+	//Filters expense based on description
+	async filterByDescription(userId, expr) {
+		try {
+			if (userId && userId.length == 24 && expr) {
+				let res = await axios.get(`${this.api}/expense/filterByNotes/${userId}?note=${expr}`);
+				return { data : res.data, status : true };
+			}
+		} catch (error) {
+			return { status : false, message : error.message };
+		}
+	}
 }
 
 const expenseApi = new ExpenseApi();

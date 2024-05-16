@@ -14,7 +14,7 @@ class Authentication {
 				res: res.body,
 			};
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 			return {
 				status: false,
 				message: "Failed to create account",
@@ -27,13 +27,13 @@ class Authentication {
 		try {
 			let res = await axios.post(`${this.api}/user/signin`, user);
 
-			console.log(res);
-			console.log(res.data.userdetails._id)
+			// console.log(res);
+			// console.log(res.data.userdetails._id)
 			if (res.data.token) {
-                console.log('true')
+                // console.log('true')
 				return { status: true, token: res.data.token, id : res.data.userdetails._id };
 			} else{
-                console.log('false')
+                // console.log('false')
                 return { status: false, message: res.message };
                 
             } 

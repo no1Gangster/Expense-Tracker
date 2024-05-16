@@ -19,7 +19,7 @@ function Signup() {
 		e.preventDefault();
 
 		if (passRef.current.value === cPassRef.current.value) createAccount();
-		else console.log(passRef.current.value, cPassRef.current.value);
+		else alert('Passwords do not match')
 	}
 
 	async function createAccount() {
@@ -63,15 +63,20 @@ function Signup() {
 						<input
 							type="text"
 							placeholder="Enter Name"
+							minLength={3}
 							className="form-control bg-dark dark-input"
 							ref={nameRef}
+							required
 						/>
 						<br />
 						<input
 							type="tel"
 							placeholder="Enter Mobile"
+							minLength={10}
+							maxLength={10}
 							className="form-control bg-dark dark-input"
 							ref={mobRef}
+							required
 						/>
 						<br />
 						<input
@@ -79,20 +84,27 @@ function Signup() {
 							placeholder="Email"
 							className="form-control bg-dark dark-input"
 							ref={mailRef}
+							required
 						/>
 						<br />
 						<input
 							type="password"
 							placeholder="Password"
 							className="form-control bg-dark dark-input"
+							minLength={6}
+							maxLength={20}
 							ref={passRef}
+							required
 						/>
 						<br />
 						<input
 							type="password"
 							placeholder="Confirm Password"
+							minLength={6}
+							maxLength={20}
 							className="form-control bg-dark dark-input"
 							ref={cPassRef}
+							required
 						/>
 						<br />
 						<input

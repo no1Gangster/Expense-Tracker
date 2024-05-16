@@ -18,7 +18,7 @@ export const AuthProvider = (props) => {
 	}, []);
 
 	const login = (token, id) => {
-		console.log(token);
+		// console.log(token);
 		setIsLoggedIn(true);
 		setToken(token);
 		setId(id);
