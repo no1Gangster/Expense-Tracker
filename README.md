@@ -40,7 +40,7 @@
   <a href="#introduction">Introduction</a> •
   <a href="#homepage">Homepage</a> •
   <a href="#statistics">Statistics</a> •
-  <a href="#sign-in/sign-up">Sign In/Sign Up</a> •
+  <a href="#sign-in\/sign-up">Sign In/Sign Up</a> •
   <a href="#how-to-use">How to Use</a> •
   <a href="#contributors">Contributors</a>
 </p>
