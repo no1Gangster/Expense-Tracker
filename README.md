@@ -1,12 +1,12 @@
 <h1 align="center">
   <br>
-  <a href=""><img src="./public/go-flowers.png" alt="Go-Flowers" width="200"></a>
+  <a href=""><img src="./Frontend/public/logo.svg" alt="Logo" width="200"></a>
   <br>
-  Go-Flowers
+  Expense Tracker
   <br>
 </h1>
 
-<h4 align="center">Blossom Your Moments.</h4>
+<h4 align="center">Start your financial journey</h4>
 
 
 <div align="center">
@@ -57,72 +57,45 @@ Welcome to the Expense Tracker, a simple yet powerful tool designed to help you 
 
 ## Homepage
 
-<img src = "./public/homepage.jpeg" alt = "HomePage" />
-<h3>Select gifts as per your requirement</h3>
+<img src = "./Frontend/public/Homepage.png" alt = "HomePage" />
+<h3>List down your expenses with the form present in the dock</h3>
 
-<p>- Lists the list of elements to assist the user to select the best product for their appropriate requirement.<br>- Items are categeorized based on occassions as well as seasonal collections.</p>
-
-
-## Item Collections
-
-<img src = "./public/product-page.jpeg" alt = "Product Page">
-<h3>Filtered List of Data</h3>
 <p>
-- List of filtered data is presented as per user's requirement.<br>
-- The page also allows user to CHOOSE the respective products.<br>
-- After select any product the user is redirected to their individual description page.<br>
+  - Enter your expenses with the given form.<br>
+  - The expense history section on hover support deletion as well as updation of expenses.<br>
+  - Expenses are sorted in descending date format.<br>
+  - Also a interactive Pie Chart is provided to display expense distribution as per types(Debit/Credit/Pending)
 </p>
 
-## Product Details
 
-<img src = "./public/desc-page.jpeg" alt = "Product Details">
-<h3>Product Details</h3>
+## Statistics
+
+<img src = "./Frontend/public/Stats.png" alt = "Stats Page">
+<h3>Filtered List of Expenses</h3>
 <p>
-- Displays the details of each product along with their price.<br>
-- The page also provides the option to select the size of the product.<br>
-- The user is redirected to cart page after "Add to Cart" button is clicked.<br>
-- All the details are minimal for easy comprehension for user and smooth UI/UX.<br>
-<b><i>To visit cart page, the user must be logged in.</i></b>
+  - List of filtered expenses is presented as per user's requirement.<br>
+  - The stats page shows the history of expenses through a graph for better visual representation.<br>
+  - The expenses are also categorised into respective category to provide summary of the transaction.<br>
+  - At the bottom the transaction history is also present to show the list of expenses with the applied filters.
 </p>
 
-## Cart
-
-<img src = "./public/cart.jpeg" alt = "Cart">
-<h3>Cart</h3>
+<h3>Budget Section</h3>
 <p>
-- Displays the list of items added by users.<br>
-- The page also provides the option to remove the item or to checkout.<br>
-- The user is redirected to payment page after "Checkout" button is clicked.<br>
-</p>
-
-## Payment Gateway
-
-<img src = "./public/payment.jpeg" alt = "Payment Gateway">
-<h3>Cart</h3>
-<p>
-- A dummy payment gateway page.<br>
-- The page provides option to Approve or Reject payment to stimulate realistic results.<br>
-- The user is redirected to orders page after "Approve" button is clicked.<br>
-</p>
-
-## Orders
-
-<img src = "./public/orders.jpeg" alt = "Orders">
-<h3>Orders</h3>
-<p>
-- The page displays list of items which checked out by user.<br>
-- The page lists out the item details.<br>
-- The page is cleared only after the item has been delivered to the user.<br>
+  - A budget section is present at the top right section of the page.<br>
+  - After user successfully adds a budget, the expenses are started to track.<br>
+  - The difference in budget and debit amount are monitored and displayed to the user.<br>
+  - If the user exceeds the set budget limit, a mail is sent to their gmail account.<br>
+  - Budget also supports updation and deletion.
+  <b><i>User can set budget duration along with the budget amount.</i></b>
 </p>
 
 ## Sign in/Sign Up
 
 
-<img src = "./public/signin.jpeg" alt = "Sign-in Box">
+<img src = "./Frontend/public/SignPage.png" alt = "Sign In Page">
 
 <p>
-- Multipurpose box, which allows Sign in as well as Sign Up in the same page.<br>
-- Uses React Hooks to implement state changes, which toggles Sign in/Sign Up form.<br>
+- Uses React Hooks to implement state changes, which toggles Login/Log out message in the navbar.<br>
 - Allows new users to join and authenticates existing user.
 <p>
 
@@ -134,15 +107,23 @@ Welcome to the Expense Tracker, a simple yet powerful tool designed to help you 
 </p>
 
 ```npm
-git clone https://github.com/no1Gangster/go-flowers.git
+git clone https://github.com/no1Gangster/Expense-Tracker.git
 ```
 
 <p>
-  - After Downloading. Install dependencies using
+  - After Downloading. Install dependencies using<br>
+  For Backend:
 
   ```npm
-npm install
-npm i json-server
+cd Backend
+npm i
+
+```
+
+For Frontend:
+```npm
+cd Frontend
+npm i
 
 ```
 </p>
@@ -151,11 +132,17 @@ npm i json-server
  - Instead use this script to automatically install and launch complete project.
 
   ```npm
-git clone https://github.com/no1Gangster/go-flowers.git
-cd go-flowers
+git clone https://github.com/no1Gangster/Expense-Tracker.git
+cd Backend
 npm install
-npm i json-server
-npm start
+npm run server
+
+```
+  ```npm
+git clone https://github.com/no1Gangster/Expense-Tracker.git
+cd Frontend
+npm install
+npm run dev
 
 ```
 </p>
@@ -163,6 +150,6 @@ npm start
 ## Contributors
 
 
->GitHub [@no1Gangster](https://github.com/no1Gangster) &nbsp;&middot;&nbsp;Backend<br>
->GitHub [@ADYASHA-2003](https://github.com/ADYASHA-2003) &nbsp;&middot;&nbsp;Frontend<br>
+>GitHub [@no1Gangster](https://github.com/no1Gangster) &nbsp;&middot;&nbsp;Frontend<br>
+>GitHub [@ADYASHA-2003](https://github.com/ADYASHA-2003) &nbsp;&middot;&nbsp;Backend<br>
 
