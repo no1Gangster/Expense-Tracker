@@ -40,7 +40,7 @@
   <a href="#introduction">Introduction</a> •
   <a href="#homepage">Homepage</a> •
   <a href="#statistics">Statistics</a> •
-  <a href="#sign-in\/sign-up">Sign In/Sign Up</a> •
+  <a href="#login-and-registration-page">Login and Registration</a> •
   <a href="#how-to-use">How to Use</a> •
   <a href="#contributors">Contributors</a>
 </p>
@@ -87,7 +87,7 @@ Welcome to the Expense Tracker, a simple yet powerful tool designed to help you 
   <b><i>User can set budget duration along with the budget amount.</i></b>
 </p>
 
-## Sign In/Sign Up
+## Login and Registration Page
 
 
 <img src = "./Frontend/public/SignPage.png" alt = "Sign In Page">
