@@ -32,7 +32,7 @@
         <img src = "https://img.shields.io/badge/npm-9.7.2-red" alt = "npm" />
     </a>
     <a href = "https://en.wikipedia.org/wiki/Bootstrap_(front-end_framework)">
-        <img src = "https://img.shields.io/badge/Bootstrap-5" alt = "Bootstrap-5" />
+        <img src = "https://img.shields.io/badge/Boostrap-5?label=Bootstrap&color=%236e2cf4" alt = "Bootstrap-5" />
     </a>
 </div>
 
@@ -64,7 +64,8 @@ Welcome to the Expense Tracker, a simple yet powerful tool designed to help you 
   - Enter your expenses with the given form.<br>
   - The expense history section on hover support deletion as well as updation of expenses.<br>
   - Expenses are sorted in descending date format.<br>
-  - Also a interactive Pie Chart is provided to display expense distribution as per types(Debit/Credit/Pending)
+  - Also a interactive Pie Chart is provided to display expense distribution as per types(Debit/Credit/Pending)<br>
+  - Bottom of the page contains a form which allows user to add expenses.
 </p>
 
 
@@ -152,4 +153,5 @@ npm run dev
 
 >GitHub [@no1Gangster](https://github.com/no1Gangster) &nbsp;&middot;&nbsp;Frontend<br>
 >GitHub [@ADYASHA-2003](https://github.com/ADYASHA-2003) &nbsp;&middot;&nbsp;Backend<br>
+>GitHub [@ansuman23](https://github.com/ansuman23) &nbsp;&middot;&nbsp;Backend<br>
 
