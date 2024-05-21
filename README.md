@@ -39,11 +39,8 @@
 <p align="center">
   <a href="#introduction">Introduction</a> •
   <a href="#homepage">Homepage</a> •
-  <a href="#item-collections">Item Collections</a> •
-  <a href="#product-details">Product Details</a> •
-  <a href="#cart">Cart</a> •
-  <a href="#orders">Orders</a> •
-  <a href="#payment">Payment Gateway</a> •
+  <a href="#statistics">Statistics</a> •
+  <a href="#sign-in/sign-up">Sign in/Sign Up</a> •
   <a href="#how-to-use">How to Use</a> •
   <a href="#contributors">Contributors</a>
 </p>
@@ -112,18 +109,13 @@ git clone https://github.com/no1Gangster/Expense-Tracker.git
 ```
 
 <p>
-  - After Downloading. Install dependencies using<br>
-  For Backend:
+  - After Downloading. Install dependencies using
 
   ```npm
 cd Backend
 npm i
 
-```
-
-For Frontend:
-```npm
-cd Frontend
+cd ../Frontend
 npm i
 
 ```
@@ -138,13 +130,9 @@ cd Backend
 npm install
 npm run server
 
-```
-  ```npm
-git clone https://github.com/no1Gangster/Expense-Tracker.git
-cd Frontend
+cd ../Frontend
 npm install
 npm run dev
-
 ```
 </p>
   
